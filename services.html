@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services | Praise Restaurant - Dine-In, Delivery & Event Catering</title>
+  <meta name="description" content="Explore Praise Restaurant's culinary services: luxury dine-in ambiance, express hot food delivery, convenient takeaway, and world-class event catering.">
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-cream-light">
+
+  <!-- ==========================================================================
+       STICKY HEADER & NAVIGATION
+       ========================================================================== -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="index.html" class="brand-logo" aria-label="Praise Restaurant Home">
+        <div class="brand-crest">
+          <i class="fa-solid fa-utensils"></i>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">PRAISE <span>RESTAURANT</span></span>
+          <span class="brand-tagline">Authentic African Cuisine</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="services.html" class="nav-link active">Our Services</a>
+        <a href="contact.html" class="nav-link">Contact Us</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="cart-toggle-btn" aria-label="View Shopping Cart" title="View Order">
+          <i class="fa-solid fa-basket-shopping"></i>
+          <span class="cart-badge-count">0</span>
+        </button>
+
+        <a href="index.html#popular-dishes" class="btn btn-primary-orange btn-sm">
+          <i class="fa-solid fa-fire-burner"></i> Order Now
+        </a>
+
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open Mobile Menu">
+          <i class="fa-solid fa-bars-staggered"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Nav Drawer -->
+  <div class="drawer-backdrop" id="mobileNavBackdrop"></div>
+  <aside class="mobile-nav-drawer" id="mobileNavDrawer" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+      <div class="brand-text">
+        <span class="brand-name" style="font-size: 1.2rem;">PRAISE <span>RESTAURANT</span></span>
+        <span class="brand-tagline">Authentic African Cuisine</span>
+      </div>
+      <button class="mobile-close-btn" id="mobileNavCloseBtn" aria-label="Close Mobile Menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <nav class="mobile-nav-links">
+      <a href="index.html" class="mobile-nav-link">
+        <span>Home</span> <i class="fa-solid fa-chevron-right"></i>
+      </a>
+      <a href="about.html" class="mobile-nav-link">
+        <span>About Us</span> <i class="fa-solid fa-chevron-right"></i>
+      </a>
+      <a href="services.html" class="mobile-nav-link active">
+        <span>Our Services</span> <i class="fa-solid fa-chevron-right"></i>
+      </a>
+      <a href="contact.html" class="mobile-nav-link">
+        <span>Contact Us</span> <i class="fa-solid fa-chevron-right"></i>
+      </a>
+    </nav>
+
+    <div style="margin-top: auto; display: flex; flex-direction: column; gap: 0.85rem;">
+      <button class="btn btn-primary-orange open-reservation-trigger" style="width: 100%;">
+        <i class="fa-regular fa-calendar-days"></i> Book Table
+      </button>
+      <a href="index.html#popular-dishes" class="btn btn-primary-green" style="width: 100%;">
+        <i class="fa-solid fa-bowl-food"></i> Explore Menu
+      </a>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       PAGE HERO BANNER
+       ========================================================================== -->
+  <section class="page-hero">
+    <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1920&q=80');"></div>
+    <div class="container page-hero-content">
+      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span>/</span>
+        <span style="color: var(--warm-cream);">Our Services</span>
+      </nav>
+      <span class="section-tag tag-orange">
+        <i class="fa-solid fa-bell-concierge"></i> Gastronomic Hospitality
+      </span>
+      <h1 class="rev-headline" style="font-size: clamp(2.4rem, 4vw, 3.8rem); margin-bottom: 1rem; opacity: 1; transform: none;">
+        Exquisite Services Tailored <span>to Your Taste</span>
+      </h1>
+      <p class="section-subtitle" style="color: rgba(245, 240, 232, 0.9); margin-left: auto; margin-right: auto;">
+        From relaxing in our warm African dining room to enjoying doorstep express delivery or hosting grand catered celebrations.
+      </p>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SERVICES DETAILED SHOWCASE
+       ========================================================================== -->
+  <section class="section-py-lg bg-cream">
+    <div class="container">
+      <div class="title-center">
+        <span class="section-tag tag-green">
+          <i class="fa-solid fa-star"></i> How We Serve You
+        </span>
+        <h2 class="section-title">Four Pillars of Praise Service</h2>
+        <div class="divider-flourish">
+          <span></span><i class="fa-solid fa-utensils"></i><span></span>
+        </div>
+      </div>
+
+      <div class="services-showcase-list">
+
+        <!-- Service 1: Dine-In Experience -->
+        <div class="service-row">
+          <div class="service-text-box">
+            <div class="service-number">01</div>
+            <h3 class="service-title">Immersive Dine-In Experience</h3>
+            <p class="service-description">
+              Step into an ambiance that honors African warmth, contemporary refinement, and welcoming hospitality. Our dining rooms feature plush seating, rich earth-tone finishes, curated afro-soul acoustics, and attentive tableside service.
+            </p>
+            <div class="service-checklist">
+              <div class="checklist-item">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Comfortable main dining hall with intimate family booths</span>
+              </div>
+              <div class="checklist-item">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>VIP private lounge for executive business lunches and private dinners</span>
+              </div>
+              <div class="checklist-item">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Complimentary valet parking and full high-speed dining Wi-Fi</span>
+              </div>
+            </div>
+            <button class="btn btn-primary-green btn-lg open-reservation-trigger">
+              <i class="fa-regular fa-calendar-check"></i> Reserve a Table Now
+            </button>
+          </div>
+
+          <div class="service-media-frame">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=80" alt="Praise Restaurant Dine-in Hall" class="service-media-img">
+          </div>
+        </div>
+
+        <!-- Service 2: Food Ordering & Delivery (Reversed) -->
+        <div class="service-row reverse">
+          <div class="service-text-box">
+            <div class="service-number" style="color: rgba(77, 151, 12, 0.25);">02</div>
+            <h3 class="service-title">Hot Express Food Delivery</h3>
+            <p class="service-description">
+              Enjoy your favorite African delicacies piping hot at home or in the office. Every order is packed in custom thermal-insulated, tamper-proof containers that lock in authentic aroma and heat.
+            </p>
+            <div class="service-checklist">
+              <div class="checklist-item">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Fast 30 to 45 minute doorstep delivery across Lekki, Ikoyi & Victoria Island</span>
+              </div>
+              <div class="checklist-item">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Free delivery on all orders over ₦25,000</span>
+              </div>
+              <div class="checklist-item">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Live SMS & WhatsApp dispatch order tracking notifications</span>
+              </div>
+            </div>
+            <a href="index.html#popular-dishes" class="btn btn-primary-orange btn-lg">
+              <i class="fa-solid fa-motorcycle"></i> Order Delivery Now
+            </a>
+          </div>
+
+          <div class="service-media-frame">
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1000&q=80" alt="Hot African Food Delivery" class="service-media-img">
+          </div>
+        </div>
+
+        <!-- Service 3: Takeaway & Pickup -->
+        <div class="service-row">
+          <div class="service-text-box">
+            <div class="service-number">03</div>
+            <h3 class="service-title">Quick Takeaway & Curbside Pickup</h3>
+            <p class="service-description">
+              On the go? Order ahead online or by phone and collect your freshly prepared meal from our dedicated express pickup counter with zero waiting time.
+            </p>
+            <div class="service-checklist">
+              <div class="checklist-item">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Ready within 20 to 25 minutes of confirmation</span>
+              </div>
+              <div class="checklist-item">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Dedicated curbside parking bay for swift vehicle handovers</span>
+              </div>
+              <div class="checklist-item">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Eco-friendly microwaveable containers ready for immediate enjoyment</span>
+              </div>
+            </div>
+            <button class="btn btn-primary-green btn-lg" onclick="openCartDrawer();">
+              <i class="fa-solid fa-bag-shopping"></i> Order for Pickup
+            </button>
+          </div>
+
+          <div class="service-media-frame">
+            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1000&q=80" alt="Takeaway African Food" class="service-media-img">
+          </div>
+        </div>
+
+        <!-- Service 4: Professional Catering (PROMINENT SPOTLIGHT) -->
+        <div class="service-row reverse" id="catering" style="border: 2px solid var(--food-orange); padding: 2.5rem; border-radius: var(--border-radius-xl); background: var(--pure-white); box-shadow: var(--shadow-xl);">
+          <div class="service-text-box">
+            <span class="section-tag tag-orange">
+              <i class="fa-solid fa-crown"></i> Signature Prestige Service
+            </span>
+            <div class="service-number" style="color: var(--food-orange);">04</div>
+            <h3 class="service-title" style="color: var(--text-dark);">
+              World-Class Professional Catering
+            </h3>
+            <p class="service-description">
+              Make your milestone occasion legendary! Praise Catering delivers comprehensive culinary production for weddings, corporate galas, milestone birthdays, diplomatic banquets, and private estates.
+            </p>
+            <div class="service-checklist">
+              <div class="checklist-item">
+                <i class="fa-solid fa-circle-check" style="color: var(--food-orange);"></i>
+                <span>Multi-tier custom banquets from 20 to 1,000+ distinguished guests</span>
+              </div>
+              <div class="checklist-item">
+                <i class="fa-solid fa-circle-check" style="color: var(--food-orange);"></i>
+                <span>Live on-site charcoal Suya & Peppered Grill stations with master chefs</span>
+              </div>
+              <div class="checklist-item">
+                <i class="fa-solid fa-circle-check" style="color: var(--food-orange);"></i>
+                <span>Uniformed captain & white-glove servers, luxury gold chaffing displays</span>
+              </div>
+              <div class="checklist-item">
+                <i class="fa-solid fa-circle-check" style="color: var(--food-orange);"></i>
+                <span>Artisanal mocktail and indigenous beverage stations (Zobo, Kunu, Tiger Nut)</span>
+              </div>
+            </div>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <a href="#catering-calculator" class="btn btn-primary-orange btn-lg">
+                <i class="fa-solid fa-calculator"></i> Calculate Instant Estimate
+              </a>
+              <a href="contact.html?type=catering" class="btn btn-outline-dark btn-lg">
+                <i class="fa-regular fa-envelope"></i> Send Catering Inquiry
+              </a>
+              <button class="btn btn-outline-orange btn-lg" onclick="openPosterModal();">
+                <i class="fa-solid fa-book-open"></i> View Menu Card
+              </button>
+            </div>
+          </div>
+
+          <div class="service-media-frame" style="height: 480px;">
+            <img src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1000&q=80" alt="Executive African Event Catering" class="service-media-img">
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       INTERACTIVE CATERING COST CALCULATOR
+       ========================================================================== -->
+  <section class="section-py-lg bg-charcoal-gradient" id="catering-calculator">
+    <div class="container">
+      <div class="title-center">
+        <span class="section-tag tag-white">
+          <i class="fa-solid fa-sliders"></i> Interactive Estimation
+        </span>
+        <h2 class="section-title" style="color: var(--pure-white);">Catering Budget Estimator</h2>
+        <div class="divider-flourish">
+          <span></span><i class="fa-solid fa-calculator" style="color: var(--food-orange);"></i><span></span>
+        </div>
+        <p class="section-subtitle">
+          Adjust the guest slider and select your preferred banquet tier to receive an immediate transparent catering cost estimate.
+        </p>
+      </div>
+
+      <div class="catering-calc-card">
+        <div class="calc-grid">
+          <div>
+            <!-- Step 1: Guest count -->
+            <div class="calc-input-group">
+              <div class="calc-label">
+                <span>1. Expected Number of Guests</span>
+                <span id="calcGuestsCountDisplay" style="color: var(--food-orange); font-size: 1.15rem;">100 Guests</span>
+              </div>
+              <input type="range" min="20" max="500" step="10" value="100" class="calc-slider" id="cateringGuestsSlider">
+              <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-muted); margin-top: 0.4rem;">
+                <span>20 Guests (Intimate)</span>
+                <span>250 Guests (Medium)</span>
+                <span>500+ Guests (Grand)</span>
+              </div>
+            </div>
+
+            <!-- Step 2: Package Tier Selection -->
+            <div class="calc-input-group">
+              <div class="calc-label">
+                <span>2. Select Banquet Package Tier</span>
+              </div>
+              <div class="tier-select-grid">
+                <div class="tier-btn-radio" data-tier="silver" data-price="8500" data-name="Silver Heritage Banquet">
+                  <div class="tier-radio-name">Silver Heritage</div>
+                  <div class="tier-radio-price">₦8,500 / guest</div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem;">2 Rice, 1 Soup, Chicken</div>
+                </div>
+
+                <div class="tier-btn-radio active" data-tier="gold" data-price="14500" data-name="Gold Celebration Feast">
+                  <div class="tier-radio-name">Gold Celebration</div>
+                  <div class="tier-radio-price">₦14,500 / guest</div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem;">Full Rice & Meat Bar</div>
+                </div>
+
+                <div class="tier-btn-radio" data-tier="royal" data-price="22000" data-name="Imperial Royal Gala">
+                  <div class="tier-radio-name">Imperial Royal</div>
+                  <div class="tier-radio-price">₦22,000 / guest</div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.3rem;">Live Suya + 5 Courses</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Event Type Note -->
+            <div style="background: var(--warm-cream-light); padding: 1rem 1.25rem; border-radius: var(--border-radius-sm); border: 1px solid var(--warm-cream-border); font-size: 0.88rem; color: var(--text-muted);">
+              <i class="fa-solid fa-circle-info" style="color: var(--primary-green); margin-right: 0.4rem;"></i>
+              Package includes executive chaffing dishes, professional serving staff, and complete table cutlery.
+            </div>
+          </div>
+
+          <!-- Result Column -->
+          <div>
+            <div class="calc-result-box">
+              <div class="calc-est-label">Estimated Catering Total</div>
+              <div class="calc-est-total" id="calcEstTotalDisplay">₦1,450,000</div>
+              <div class="calc-est-guests" id="calcEstGuestsSubDisplay">Estimated total for 100 guests on Gold Celebration Feast</div>
+              
+              <a href="contact.html?type=catering" class="btn btn-primary-orange btn-lg" style="width: 100%;">
+                <i class="fa-solid fa-file-invoice"></i> Request Formal Proposal
+              </a>
+
+              <div style="margin-top: 1rem; font-size: 0.78rem; color: var(--text-light-muted);">
+                *Final quotation may vary based on exact venue location and specific custom requests.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FREQUENTLY ASKED QUESTIONS (FAQ)
+       ========================================================================== -->
+  <section class="section-py bg-cream">
+    <div class="container" style="max-width: 900px;">
+      <div class="title-center">
+        <span class="section-tag tag-green">
+          <i class="fa-solid fa-circle-question"></i> Common Questions
+        </span>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="divider-flourish">
+          <span></span><i class="fa-solid fa-pepper-hot"></i><span></span>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2.5rem;">
+        <div style="background: var(--pure-white); padding: 1.5rem 1.75rem; border-radius: var(--border-radius-md); box-shadow: var(--shadow-sm); border-left: 4px solid var(--primary-green);">
+          <h4 style="font-weight: 800; font-size: 1.08rem; margin-bottom: 0.5rem; color: var(--text-dark);">How far in advance should I book catering services?</h4>
+          <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6;">
+            For large weddings and corporate galas with over 100 guests, we recommend booking at least 3 to 6 weeks in advance. For intimate private parties (20–50 guests), 5 to 7 business days notice is usually sufficient depending on kitchen availability.
+          </p>
+        </div>
+
+        <div style="background: var(--pure-white); padding: 1.5rem 1.75rem; border-radius: var(--border-radius-md); box-shadow: var(--shadow-sm); border-left: 4px solid var(--food-orange);">
+          <h4 style="font-weight: 800; font-size: 1.08rem; margin-bottom: 0.5rem; color: var(--text-dark);">What areas do you deliver to for food orders?</h4>
+          <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6;">
+            We offer express dispatch to Lekki Phase 1, Ikoyi, Victoria Island, Oniru, Banana Island, and surrounding estates. For orders outside these zones, special dispatch can be scheduled upon request.
+          </p>
+        </div>
+
+        <div style="background: var(--pure-white); padding: 1.5rem 1.75rem; border-radius: var(--border-radius-md); box-shadow: var(--shadow-sm); border-left: 4px solid var(--primary-green);">
+          <h4 style="font-weight: 800; font-size: 1.08rem; margin-bottom: 0.5rem; color: var(--text-dark);">Can menu items be customized for dietary preferences?</h4>
+          <p style="font-size: 0.92rem; color: var(--text-muted); line-height: 1.6;">
+            Absolutely! We cater to specific spice tolerance levels (Mild, Medium, Hot, Extra Hot) and can prepare vegetarian/vegan versions of our soups (such as pure palm-oil vegetable soup without crayfish) upon special instruction.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CALL TO ACTION
+       ========================================================================== -->
+  <section class="section-py bg-cream-light">
+    <div class="container">
+      <div class="cta-banner-wrapper">
+        <h2 class="cta-headline">Ready to Experience Praise Hospitality?</h2>
+        <p class="cta-subtext">
+          Whether you are reserving a romantic table, placing an order for dinner, or planning a celebratory event, we are at your service.
+        </p>
+        <div class="cta-btn-group">
+          <a href="index.html#popular-dishes" class="btn btn-primary-orange btn-lg">
+            <i class="fa-solid fa-utensils"></i> Order Online Now
+          </a>
+          <button class="btn btn-outline-white btn-lg open-reservation-trigger">
+            <i class="fa-regular fa-calendar-check"></i> Book a Table
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <a href="index.html" class="brand-logo" style="margin-bottom: 1rem;">
+            <div class="brand-crest">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+            <div class="brand-text">
+              <span class="brand-name">PRAISE <span>RESTAURANT</span></span>
+              <span class="brand-tagline">Authentic African Cuisine</span>
+            </div>
+          </a>
+          <p class="footer-brand-desc">
+            Praise Restaurant celebrates the rich, diverse flavors of Africa. Freshly prepared with passion, authentic spices, and heartfelt hospitality.
+          </p>
+          <div class="footer-social-links">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link-btn" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link-btn" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="social-link-btn" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+            <a href="https://wa.me/2348123456789" target="_blank" rel="noopener noreferrer" class="social-link-btn" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Quick Links</h4>
+          <ul class="footer-link-list">
+            <li class="footer-link-item"><a href="index.html"><i class="fa-solid fa-angle-right"></i> Home</a></li>
+            <li class="footer-link-item"><a href="about.html"><i class="fa-solid fa-angle-right"></i> About Our Story</a></li>
+            <li class="footer-link-item"><a href="services.html"><i class="fa-solid fa-angle-right"></i> Our Services & Catering</a></li>
+            <li class="footer-link-item"><a href="contact.html"><i class="fa-solid fa-angle-right"></i> Contact & Location</a></li>
+            <li class="footer-link-item"><a href="index.html#popular-dishes"><i class="fa-solid fa-angle-right"></i> Online Food Menu</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Opening Hours</h4>
+          <ul class="footer-contact-list">
+            <li class="footer-contact-item">
+              <i class="fa-regular fa-clock"></i>
+              <div>
+                <strong>Mon – Thu:</strong><br>
+                10:00 AM – 10:30 PM
+              </div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-regular fa-clock"></i>
+              <div>
+                <strong>Fri – Sun:</strong><br>
+                10:00 AM – 11:30 PM
+              </div>
+            </li>
+            <li class="footer-contact-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <div>
+                14 Admiralty Way, Lekki Phase 1, Lagos, Nigeria
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Stay Connected</h4>
+          <p class="newsletter-desc">
+            Subscribe for exclusive weekend discounts, chef tasting invites, and catering seasonal specials.
+          </p>
+          <form class="newsletter-form-inline">
+            <input type="email" class="newsletter-input" placeholder="Your email address" required aria-label="Email Address">
+            <button type="submit" class="btn btn-primary-orange btn-sm" aria-label="Subscribe">
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+          <div style="margin-top: 1.25rem; font-size: 0.82rem; color: var(--text-light-muted); display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-phone" style="color: var(--primary-green-light);"></i>
+            <span>Orders Hotline: <strong>+234 812 345 6789</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>
+          &copy; 2026 Praise Restaurant. All Rights Reserved. Crafted with love for authentic African cuisine.
+        </div>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="#" style="color: var(--text-light-muted);">Privacy Policy</a>
+          <a href="#" style="color: var(--text-light-muted);">Terms of Service</a>
+          <a href="contact.html" style="color: var(--food-orange-light);">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Slide-Over Shopping Cart Drawer -->
+  <div class="drawer-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart">
+    <div class="cart-header">
+      <div class="cart-header-title">
+        <i class="fa-solid fa-bag-shopping" style="color: var(--food-orange);"></i>
+        <span>Your Food Order</span>
+      </div>
+      <button class="cart-close-btn" id="cartCloseBtn" aria-label="Close Order Drawer">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="cart-items-list" id="cartItemsList"></div>
+    <div class="cart-footer">
+      <div class="cart-summary-row"><span>Subtotal</span><span id="cartSubtotal">₦0</span></div>
+      <div class="cart-summary-row"><span>Delivery Fee</span><span id="cartDeliveryFee">₦0</span></div>
+      <div class="cart-summary-row"><span>Estimated VAT (7.5%)</span><span id="cartVat">₦0</span></div>
+      <div class="cart-summary-total"><span>Total Due</span><span id="cartGrandTotal" style="color: var(--food-orange);">₦0</span></div>
+      <button class="btn btn-primary-orange btn-lg cart-checkout-btn" id="proceedCheckoutBtn">
+        <i class="fa-solid fa-credit-card"></i> Proceed to Checkout
+      </button>
+    </div>
+  </aside>
+
+  <!-- Checkout Modal -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Complete Your Food Order</h3>
+        <button class="modal-close-btn" onclick="closeModal('checkoutModal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div id="checkoutOrderSummary"></div>
+        <form id="checkoutForm" onsubmit="handleCheckoutSubmit(event)">
+          <div class="form-group-row">
+            <div class="form-group">
+              <label class="form-label" for="srvCustName">Full Name *</label>
+              <input type="text" id="srvCustName" name="customerName" class="form-control" placeholder="e.g. Tunde Williams" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="srvCustPhone">Phone Number *</label>
+              <input type="tel" id="srvCustPhone" name="customerPhone" class="form-control" placeholder="e.g. 0812 345 6789" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="srvOrderType">Order Type *</label>
+            <select id="srvOrderType" name="orderType" class="form-control">
+              <option value="delivery">Express Delivery to Doorstep</option>
+              <option value="pickup">Takeaway Pickup at Praise Restaurant</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="srvCustAddress">Delivery Address / Notes</label>
+            <textarea id="srvCustAddress" name="customerAddress" class="form-control" placeholder="Street name, estate, apartment/house number..." style="min-height: 80px;"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="srvPayMethod">Payment Method *</label>
+            <select id="srvPayMethod" name="paymentMethod" class="form-control">
+              <option value="Online Card / Transfer (Paystack / Flutterwave)">Pay Online with Debit Card / USSD</option>
+              <option value="Direct Bank Transfer to Praise Restaurant GTBank">Direct Bank Transfer to Praise GTBank</option>
+              <option value="Cash / POS on Delivery or Pickup">Pay on Delivery / Pickup (POS / Cash)</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary-orange btn-lg" style="width: 100%; margin-top: 1rem;">
+            <i class="fa-solid fa-check-circle"></i> Confirm & Place Order
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table Reservation Modal -->
+  <div class="modal-overlay" id="reservationModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">Reserve a Table at Praise Restaurant</h3>
+        <button class="modal-close-btn" onclick="closeModal('reservationModal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="handleReservationSubmit(event)">
+          <div class="form-group-row">
+            <div class="form-group">
+              <label class="form-label" for="srvResName">Full Name *</label>
+              <input type="text" id="srvResName" name="guestName" class="form-control" placeholder="e.g. Chioma Eze" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="srvResPhone">Phone Number *</label>
+              <input type="tel" id="srvResPhone" name="guestPhone" class="form-control" placeholder="e.g. 0803 123 4567" required>
+            </div>
+          </div>
+          <div class="form-group-row">
+            <div class="form-group">
+              <label class="form-label" for="srvResDate">Date *</label>
+              <input type="date" id="srvResDate" name="resDate" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="srvResTime">Time *</label>
+              <select id="srvResTime" name="resTime" class="form-control" required>
+                <option value="12:30 PM">12:30 PM (Lunch)</option>
+                <option value="1:30 PM">1:30 PM (Lunch)</option>
+                <option value="6:00 PM">6:00 PM (Dinner)</option>
+                <option value="7:30 PM" selected>7:30 PM (Prime Dinner)</option>
+                <option value="9:00 PM">9:00 PM (Late Dinner)</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group-row">
+            <div class="form-group">
+              <label class="form-label" for="srvGuestCount">Guests *</label>
+              <select id="srvGuestCount" name="guestCount" class="form-control">
+                <option value="2" selected>2 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="6">6 Guests</option>
+                <option value="8">8 Guests</option>
+                <option value="12">12 Guests</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="srvSeatingArea">Area</label>
+              <select id="srvSeatingArea" name="seatingArea" class="form-control">
+                <option value="Main Dining Hall">Main Dining Hall</option>
+                <option value="VIP Private Lounge">VIP Private Lounge</option>
+                <option value="Outdoor Terrace Garden">Outdoor Terrace Garden</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary-green btn-lg" style="width: 100%; margin-top: 1rem;">
+            <i class="fa-solid fa-calendar-check"></i> Confirm Reservation
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Menu Poster Modal -->
+  <div class="modal-overlay" id="menuPosterModal">
+    <div class="modal-dialog" style="max-width: 620px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Official Restaurant Menu Card</h3>
+        <button class="modal-close-btn" onclick="closeModal('menuPosterModal')">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="modal-body" style="padding: 1.25rem; text-align: center; background-color: var(--dark-charcoal);">
+        <img src="images/menu-poster.jpg" alt="Praise Restaurant Menu Card" style="max-height: 68vh; margin: 0 auto; border-radius: var(--border-radius-md); box-shadow: var(--shadow-xl); border: 2px solid rgba(255,255,255,0.15);">
+        <div style="margin-top: 1.25rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+          <a href="images/menu-poster.jpg" target="_blank" class="btn btn-primary-orange btn-sm">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Full High-Res Poster
+          </a>
+          <button class="btn btn-outline-white btn-sm" onclick="closeModal('menuPosterModal')">
+            Close Viewer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/menu-data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
