@@ -2,31 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Praise Restaurant | Authentic African Cuisine & Professional Catering</title>
-  <meta name="description" content="Experience the true taste of Africa at Praise Restaurant. Authentic Nigerian Jollof, Royal Egusi soup, peppered delicacies, refreshing zobo, and world-class event catering.">
-  <meta name="keywords" content="African restaurant, Nigerian food, Jollof Rice, Egusi soup, Catfish Pepper soup, Praise Restaurant, African catering Lagos">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Praise Restaurant | Authentic African Cuisine & Event Catering Web App</title>
+  <meta name="description" content="Experience authentic African cuisine at Praise Restaurant. Smoky Nigerian Jollof, Royal Egusi, peppered meats, and world-class catering in Lekki Phase 1, Lagos.">
+  <meta name="theme-color" content="#4D970C">
 
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Praise Restaurant - Experience the True Taste of Africa">
-  <meta property="og:description" content="Authentic African flavors freshly prepared with passion and served with love. Explore our menu and catering services.">
-  <meta property="og:type" content="website">
+  <!-- PWA Manifest & iOS meta -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Praise Food">
 
   <!-- Font Awesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
-  <!-- Custom Stylesheet -->
+  <!-- Custom Stylesheets -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/webapp.css">
 </head>
 <body class="bg-cream-light">
 
   <!-- ==========================================================================
-       STICKY HEADER & NAVIGATION
+       APP SHELL: TOPBAR & STICKY HEADER
        ========================================================================== -->
-  <header class="site-header">
-    <div class="container header-container">
+  <header class="site-header" style="height: auto;">
+    <!-- Top Utility Bar (Desktop / Tablet) -->
+    <div class="container webapp-topbar">
+      <div class="topbar-location-pill">
+        <span class="topbar-status-dot"></span>
+        <span>14 Admiralty Way, Lekki Phase 1 &bull; <strong>Open (Avg. 30m)</strong></span>
+      </div>
+
+      <!-- Quick Search Bar -->
+      <div class="topbar-search-box">
+        <i class="fa-solid fa-magnifying-glass topbar-search-icon"></i>
+        <input type="text" class="topbar-search-input" placeholder="Search dishes (Press '/' to focus)..." aria-label="Search Menu">
+      </div>
+
+      <!-- Quick Actions -->
+      <div class="topbar-quick-actions">
+        <button class="favorites-pill-btn" id="favoritesPillBtn" title="Saved Favorites">
+          <i class="fa-solid fa-heart" style="color: #ff6b6b;"></i>
+          <span>Favorites (<span class="fav-badge-count">0</span>)</span>
+        </button>
+        <button class="pwa-install-btn" style="display: none;" title="Install Praise App">
+          <i class="fa-solid fa-download"></i> Install App
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Navigation Bar -->
+    <div class="container header-container" style="height: 72px;">
       <!-- Brand Logo -->
-      <a href="index.html" class="brand-logo" aria-label="Praise Restaurant Home">
+      <a href="#home" class="brand-logo" data-view-target="home" aria-label="Praise Restaurant Home">
         <div class="brand-crest">
           <i class="fa-solid fa-utensils"></i>
         </div>
@@ -36,26 +64,24 @@
         </div>
       </a>
 
-      <!-- Desktop Nav Links -->
-      <nav class="nav-links" aria-label="Main Navigation">
-        <a href="index.html" class="nav-link active">Home</a>
-        <a href="about.html" class="nav-link">About Us</a>
-        <a href="services.html" class="nav-link">Our Services</a>
-        <a href="contact.html" class="nav-link">Contact Us</a>
+      <!-- Desktop Nav Links (SPA View Switching) -->
+      <nav class="nav-links" aria-label="App Navigation">
+        <a href="#home" class="nav-link active" data-view-target="home">Home</a>
+        <a href="#menu" class="nav-link" data-view-target="menu">Menu Explorer</a>
+        <a href="#reserve" class="nav-link" data-view-target="reserve">Book Table</a>
+        <a href="#catering" class="nav-link" data-view-target="catering">Catering Studio</a>
+        <a href="#about" class="nav-link" data-view-target="about">Our Heritage</a>
+        <a href="#contact" class="nav-link" data-view-target="contact">Contact</a>
       </nav>
 
       <!-- Action Buttons -->
       <div class="header-actions">
-        <button class="btn btn-outline-white btn-sm open-reservation-trigger" style="display: none;">
-          <i class="fa-regular fa-calendar-days"></i> Reserve
-        </button>
-
         <button class="cart-toggle-btn" aria-label="View Shopping Cart" title="View Order">
           <i class="fa-solid fa-basket-shopping"></i>
           <span class="cart-badge-count">0</span>
         </button>
 
-        <a href="#popular-dishes" class="btn btn-primary-orange btn-sm">
+        <a href="#menu" class="btn btn-primary-orange btn-sm" data-view-target="menu">
           <i class="fa-solid fa-fire-burner"></i> Order Now
         </a>
 
@@ -80,700 +106,688 @@
     </div>
 
     <nav class="mobile-nav-links">
-      <a href="index.html" class="mobile-nav-link active">
-        <span>Home</span> <i class="fa-solid fa-chevron-right"></i>
+      <a href="#home" class="mobile-nav-link active" data-view-target="home">
+        <span><i class="fa-solid fa-house" style="margin-right: 0.6rem; color: var(--food-orange);"></i> Home</span> <i class="fa-solid fa-chevron-right"></i>
       </a>
-      <a href="about.html" class="mobile-nav-link">
-        <span>About Us</span> <i class="fa-solid fa-chevron-right"></i>
+      <a href="#menu" class="mobile-nav-link" data-view-target="menu">
+        <span><i class="fa-solid fa-bowl-food" style="margin-right: 0.6rem; color: var(--primary-green);"></i> Menu Explorer</span> <i class="fa-solid fa-chevron-right"></i>
       </a>
-      <a href="services.html" class="mobile-nav-link">
-        <span>Our Services</span> <i class="fa-solid fa-chevron-right"></i>
+      <a href="#reserve" class="mobile-nav-link" data-view-target="reserve">
+        <span><i class="fa-regular fa-calendar-days" style="margin-right: 0.6rem; color: var(--food-orange);"></i> Table Reservation</span> <i class="fa-solid fa-chevron-right"></i>
       </a>
-      <a href="contact.html" class="mobile-nav-link">
-        <span>Contact Us</span> <i class="fa-solid fa-chevron-right"></i>
+      <a href="#catering" class="mobile-nav-link" data-view-target="catering">
+        <span><i class="fa-solid fa-champagne-glasses" style="margin-right: 0.6rem; color: var(--primary-green);"></i> Catering Studio</span> <i class="fa-solid fa-chevron-right"></i>
+      </a>
+      <a href="#about" class="mobile-nav-link" data-view-target="about">
+        <span><i class="fa-solid fa-book-open" style="margin-right: 0.6rem; color: var(--food-orange);"></i> Our Heritage</span> <i class="fa-solid fa-chevron-right"></i>
+      </a>
+      <a href="#contact" class="mobile-nav-link" data-view-target="contact">
+        <span><i class="fa-solid fa-phone" style="margin-right: 0.6rem; color: var(--primary-green);"></i> Contact Us</span> <i class="fa-solid fa-chevron-right"></i>
+      </a>
+      <a href="#favorites" class="mobile-nav-link" data-view-target="favorites">
+        <span><i class="fa-solid fa-heart" style="margin-right: 0.6rem; color: #ff6b6b;"></i> Saved Favorites</span> <i class="fa-solid fa-chevron-right"></i>
+      </a>
+      <a href="#tracker" class="mobile-nav-link" data-view-target="tracker">
+        <span><i class="fa-solid fa-truck-fast" style="margin-right: 0.6rem; color: var(--primary-green-light);"></i> Order Tracker</span> <i class="fa-solid fa-chevron-right"></i>
       </a>
     </nav>
 
     <div style="margin-top: auto; display: flex; flex-direction: column; gap: 0.85rem;">
-      <button class="btn btn-primary-orange open-reservation-trigger" style="width: 100%;">
+      <a href="#reserve" class="btn btn-primary-orange" data-view-target="reserve" style="width: 100%;">
         <i class="fa-regular fa-calendar-days"></i> Book Table
-      </button>
-      <a href="#popular-dishes" class="btn btn-primary-green" style="width: 100%;">
-        <i class="fa-solid fa-bowl-food"></i> Explore Menu
       </a>
+      <button class="btn btn-outline-white" onclick="openPosterModal();" style="width: 100%;">
+        <i class="fa-solid fa-image"></i> View Menu Poster
+      </button>
     </div>
   </aside>
 
   <!-- ==========================================================================
-       HERO SECTION – CINEMATIC SLIDER REVOLUTION EXPERIENCE
+       SPA VIEWS CONTAINER
        ========================================================================== -->
-  <section class="hero-slider-section" aria-label="Hero Showcase Slider">
-    <div class="rev-slider-viewport">
-      
-      <!-- Slide 1: Welcome to Praise Restaurant -->
-      <div class="rev-slide active" data-slide="0">
-        <div class="rev-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1920&q=85');"></div>
-        <div class="rev-slide-overlay"></div>
-        <div class="container rev-slide-content">
-          <div class="rev-content-grid">
-            <div class="rev-text-side">
-              <div class="rev-badge">
-                <i class="fa-solid fa-award"></i> Premier African Dining Experience
-              </div>
-              <h1 class="rev-headline">
-                Experience the <span>True Taste</span> of Africa
-              </h1>
-              <p class="rev-subheading">
-                Authentic African flavors, freshly prepared with passion and served with love. Savor timeless recipes perfected through generations of culinary craftsmanship.
-              </p>
-              <div class="rev-cta-group">
-                <a href="#popular-dishes" class="btn btn-primary-orange btn-lg">
-                  <i class="fa-solid fa-utensils"></i> Explore Our Menu
-                </a>
-                <button class="btn btn-outline-white btn-lg open-reservation-trigger">
-                  <i class="fa-regular fa-calendar-check"></i> Reserve a Table
-                </button>
-              </div>
-            </div>
+  <main class="app-view-container" style="padding-top: 120px;">
 
-            <div class="rev-visual-side">
-              <div class="rev-main-dish-wrapper">
-                <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?auto=format&fit=crop&w=800&q=80" alt="Smoky Jollof Spread" class="rev-dish-img">
-              </div>
-              <div class="floating-hero-badge badge-top-left">
-                <div class="badge-icon-box badge-icon-orange">
-                  <i class="fa-solid fa-star"></i>
-                </div>
-                <div>
-                  <div class="badge-info-title">Guest Rating</div>
-                  <div class="badge-info-val">4.9 / 5.0 (2.4k+ Reviews)</div>
-                </div>
-              </div>
-              <div class="floating-hero-badge badge-bottom-right">
-                <div class="badge-icon-box badge-icon-green">
-                  <i class="fa-solid fa-leaf"></i>
-                </div>
-                <div>
-                  <div class="badge-info-title">Purity & Heritage</div>
-                  <div class="badge-info-val">100% Native Spices</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 2: Authentic African Cuisine -->
-      <div class="rev-slide" data-slide="1">
-        <div class="rev-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1920&q=85');"></div>
-        <div class="rev-slide-overlay"></div>
-        <div class="container rev-slide-content">
-          <div class="rev-content-grid">
-            <div class="rev-text-side">
-              <div class="rev-badge">
-                <i class="fa-solid fa-pepper-hot"></i> Pure Culinary Authenticity
-              </div>
-              <h2 class="rev-headline">
-                Every Dish Tells a <span>Delicious Story</span>
-              </h2>
-              <p class="rev-subheading">
-                Discover traditional African delicacies prepared with fresh ingredients and unforgettable flavors. From smoky firewood Nigerian Jollof to slow-simmered Royal Egusi and fiery peppered grills.
-              </p>
-              <div class="rev-cta-group">
-                <a href="#popular-dishes" class="btn btn-primary-orange btn-lg">
-                  <i class="fa-solid fa-bowl-food"></i> Discover Our Dishes
-                </a>
-                <button class="btn btn-outline-white btn-lg" onclick="openCartDrawer();">
-                  <i class="fa-solid fa-bag-shopping"></i> Order Online Now
-                </button>
-              </div>
-            </div>
-
-            <div class="rev-visual-side">
-              <div class="rev-main-dish-wrapper">
-                <img src="https://images.unsplash.com/photo-1547496502-affa22d38842?auto=format&fit=crop&w=800&q=80" alt="Royal African Soup" class="rev-dish-img">
-              </div>
-              <div class="floating-hero-badge badge-top-left">
-                <div class="badge-icon-box badge-icon-green">
-                  <i class="fa-solid fa-fire"></i>
-                </div>
-                <div>
-                  <div class="badge-info-title">Signature Flavor</div>
-                  <div class="badge-info-val">Firewood Smoke Infused</div>
-                </div>
-              </div>
-              <div class="floating-hero-badge badge-bottom-right">
-                <div class="badge-icon-box badge-icon-orange">
-                  <i class="fa-solid fa-heart"></i>
-                </div>
-                <div>
-                  <div class="badge-info-title">Chef's Special</div>
-                  <div class="badge-info-val">Slow Braised Meats</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Slide 3: Catering & Special Moments -->
-      <div class="rev-slide" data-slide="2">
-        <div class="rev-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1920&q=85');"></div>
-        <div class="rev-slide-overlay"></div>
-        <div class="container rev-slide-content">
-          <div class="rev-content-grid">
-            <div class="rev-text-side">
-              <div class="rev-badge">
-                <i class="fa-solid fa-champagne-glasses"></i> Executive Event Catering
-              </div>
-              <h2 class="rev-headline">
-                Making Every Occasion <span>Unforgettably Delicious</span>
-              </h2>
-              <p class="rev-subheading">
-                From intimate family gatherings to grand wedding celebrations and corporate galas, let Praise Restaurant bring exceptional African cuisine and impeccable hospitality to your events.
-              </p>
-              <div class="rev-cta-group">
-                <a href="services.html#catering" class="btn btn-primary-orange btn-lg">
-                  <i class="fa-solid fa-bell-concierge"></i> Explore Catering
-                </a>
-                <a href="contact.html" class="btn btn-outline-white btn-lg">
-                  <i class="fa-regular fa-envelope"></i> Contact Us
-                </a>
-              </div>
-            </div>
-
-            <div class="rev-visual-side">
-              <div class="rev-main-dish-wrapper">
-                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Catering Spread" class="rev-dish-img">
-              </div>
-              <div class="floating-hero-badge badge-top-left">
-                <div class="badge-icon-box badge-icon-orange">
-                  <i class="fa-solid fa-users"></i>
-                </div>
-                <div>
-                  <div class="badge-info-title">Event Scale</div>
-                  <div class="badge-info-val">20 to 1,000+ Guests</div>
-                </div>
-              </div>
-              <div class="floating-hero-badge badge-bottom-right">
-                <div class="badge-icon-box badge-icon-green">
-                  <i class="fa-solid fa-utensils"></i>
-                </div>
-                <div>
-                  <div class="badge-info-title">Live Stations</div>
-                  <div class="badge-info-val">Suya & Peppered Grill</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Slider Controls & Indicators -->
-    <div class="rev-slider-controls">
-      <div class="container rev-controls-inner">
-        <div class="rev-dots-container">
-          <button class="rev-dot active" aria-label="Slide 1">
-            <span>01</span> Welcome
-          </button>
-          <button class="rev-dot" aria-label="Slide 2">
-            <span>02</span> Cuisine
-          </button>
-          <button class="rev-dot" aria-label="Slide 3">
-            <span>03</span> Catering
-          </button>
-        </div>
-
-        <div class="rev-slide-nav">
-          <button class="rev-nav-arrow rev-prev-btn" aria-label="Previous Slide">
-            <i class="fa-solid fa-arrow-left"></i>
-          </button>
-          <button class="rev-nav-arrow rev-next-btn" aria-label="Next Slide">
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Timeline Progress Bar -->
-    <div class="rev-progress-bar-container">
-      <div class="rev-progress-bar"></div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       WELCOME SECTION
-       ========================================================================== -->
-  <section class="section-py-lg bg-cream">
-    <div class="container">
-      <div class="welcome-grid">
-        <div class="welcome-image-stack">
-          <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Praise Restaurant signature dishes" class="welcome-img-primary">
-          <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80" alt="Crispy Peppered Meats" class="welcome-img-secondary">
+    <!-- ========================================================================
+         VIEW 1: HOME (#home)
+         ======================================================================== -->
+    <section class="app-view active-view" id="view-home">
+      <!-- Cinematic Slider Revolution Hero -->
+      <div class="hero-slider-section" aria-label="Hero Showcase Slider">
+        <div class="rev-slider-viewport">
           
-          <div class="welcome-experience-pill">
-            <div class="exp-years">15+</div>
-            <div class="exp-label">Years of African<br>Culinary Excellence</div>
-          </div>
-        </div>
-
-        <div class="welcome-content">
-          <span class="section-tag tag-green">
-            <i class="fa-solid fa-leaf"></i> Welcome to Praise Restaurant
-          </span>
-          <h2 class="section-title">
-            Where African Heritage Meets Culinary Artistry
-          </h2>
-          <div class="divider-flourish" style="justify-content: flex-start; margin-left: 0;">
-            <span></span><i class="fa-solid fa-pepper-hot"></i>
-          </div>
-          <p style="font-size: 1.1rem; color: var(--text-dark); line-height: 1.8; margin-bottom: 1.25rem; font-weight: 500;">
-            At Praise Restaurant, we celebrate the vibrancy, warmth, and soul of African gastronomy. Every dish is a rich tribute to traditional recipes passed down through generations.
-          </p>
-          <p style="font-size: 0.96rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem;">
-            From the deep smokiness of our signature Nigerian Jollof rice cooked over controlled firewood flames, to the restorative richness of our Catfish Pepper Soup and the luxurious silkiness of our Egusi soup, our chefs prepare every meal with farm-fresh organic produce and unadulterated native spices.
-          </p>
-
-          <div class="welcome-features">
-            <div class="feature-pill-card">
-              <div class="feature-pill-icon"><i class="fa-solid fa-seedling"></i></div>
-              <div>
-                <div class="feature-pill-title">Farm-Fresh Produce</div>
-                <div class="feature-pill-desc">Hand-picked daily from trusted local sustainable farms.</div>
-              </div>
-            </div>
-
-            <div class="feature-pill-card">
-              <div class="feature-pill-icon"><i class="fa-solid fa-fire-burner"></i></div>
-              <div>
-                <div class="feature-pill-title">Firewood Smoke Infusion</div>
-                <div class="feature-pill-desc">Genuine party Jollof aroma you can smell and savor.</div>
-              </div>
-            </div>
-
-            <div class="feature-pill-card">
-              <div class="feature-pill-icon"><i class="fa-solid fa-mortar-pestle"></i></div>
-              <div>
-                <div class="feature-pill-title">Stone-Ground Spices</div>
-                <div class="feature-pill-desc">Dawadawa, uziza, scent leaves, and prime crayfish.</div>
-              </div>
-            </div>
-
-            <div class="feature-pill-card">
-              <div class="feature-pill-icon"><i class="fa-solid fa-heart-pulse"></i></div>
-              <div>
-                <div class="feature-pill-title">Zero Artificial Additives</div>
-                <div class="feature-pill-desc">Pure, wholesome flavors healthy for the whole family.</div>
+          <!-- Slide 1 -->
+          <div class="rev-slide active" data-slide="0">
+            <div class="rev-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1920&q=85');"></div>
+            <div class="rev-slide-overlay"></div>
+            <div class="container rev-slide-content">
+              <div class="rev-content-grid">
+                <div class="rev-text-side">
+                  <div class="rev-badge"><i class="fa-solid fa-award"></i> Premier African Dining Web App</div>
+                  <h1 class="rev-headline">Experience the <span>True Taste</span> of Africa</h1>
+                  <p class="rev-subheading">Authentic African flavors, freshly prepared with passion and served with love. Savor timeless recipes perfected through generations.</p>
+                  <div class="rev-cta-group">
+                    <a href="#menu" class="btn btn-primary-orange btn-lg" data-view-target="menu">
+                      <i class="fa-solid fa-utensils"></i> Explore Menu & Order
+                    </a>
+                    <a href="#reserve" class="btn btn-outline-white btn-lg" data-view-target="reserve">
+                      <i class="fa-regular fa-calendar-check"></i> Reserve a Table
+                    </a>
+                  </div>
+                </div>
+                <div class="rev-visual-side">
+                  <div class="rev-main-dish-wrapper">
+                    <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?auto=format&fit=crop&w=800&q=80" alt="Smoky Jollof Spread" class="rev-dish-img">
+                  </div>
+                  <div class="floating-hero-badge badge-top-left">
+                    <div class="badge-icon-box badge-icon-orange"><i class="fa-solid fa-star"></i></div>
+                    <div><div class="badge-info-title">Guest Rating</div><div class="badge-info-val">4.9 / 5.0 (2,400+ Diners)</div></div>
+                  </div>
+                  <div class="floating-hero-badge badge-bottom-right">
+                    <div class="badge-icon-box badge-icon-green"><i class="fa-solid fa-leaf"></i></div>
+                    <div><div class="badge-info-title">Purity & Heritage</div><div class="badge-info-val">100% Native Spices</div></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <div style="display: flex; gap: 1.25rem; align-items: center; flex-wrap: wrap;">
-            <a href="about.html" class="btn btn-primary-green">
-              <i class="fa-solid fa-book-open"></i> Read Our Story
-            </a>
-            <button class="btn btn-outline-dark open-reservation-trigger">
-              <i class="fa-regular fa-calendar-check"></i> Book a Table
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       POPULAR DISHES & MENU SECTION (INTERACTIVE ORDERING)
-       ========================================================================== -->
-  <section class="section-py-lg bg-cream-light" id="popular-dishes">
-    <div class="container">
-      <div class="title-center">
-        <span class="section-tag tag-orange">
-          <i class="fa-solid fa-utensils"></i> Handcrafted Delicacies
-        </span>
-        <h2 class="section-title">Explore Our Popular Dishes</h2>
-        <div class="divider-flourish">
-          <span></span><i class="fa-solid fa-pepper-hot"></i><span></span>
-        </div>
-        <p class="section-subtitle">
-          Indulge in our carefully curated selection of authentic African classics. Each plate is freshly prepared with premium meats, fragrant herbs, and unforgettable seasonings.
-        </p>
-      </div>
-
-      <!-- Menu Category Filter Tabs -->
-      <nav class="menu-filter-nav" aria-label="Menu Category Filter">
-        <button class="filter-tab-btn active" data-filter="all">
-          <i class="fa-solid fa-border-all"></i> All Dishes
-        </button>
-        <button class="filter-tab-btn" data-filter="rice">
-          <i class="fa-solid fa-bowl-rice"></i> Rice Dishes
-        </button>
-        <button class="filter-tab-btn" data-filter="swallows">
-          <i class="fa-solid fa-bowl-food"></i> Swallows & Soups
-        </button>
-        <button class="filter-tab-btn" data-filter="meats">
-          <i class="fa-solid fa-drumstick-bite"></i> Peppered Meats & Fish
-        </button>
-        <button class="filter-tab-btn" data-filter="peppersoup">
-          <i class="fa-solid fa-mug-hot"></i> Pepper Soups
-        </button>
-        <button class="filter-tab-btn" data-filter="pasta">
-          <i class="fa-solid fa-wheat-awn"></i> Pasta & Sides
-        </button>
-        <button class="filter-tab-btn" data-filter="drinks">
-          <i class="fa-solid fa-martini-glass-citrus"></i> Beverages & Drinks
-        </button>
-      </nav>
-
-      <!-- Dishes Dynamic Grid -->
-      <div class="dishes-grid" id="dishesGrid">
-        <!-- Rendered dynamically by main.js from MENU_DATA -->
-      </div>
-
-      <div style="text-align: center; margin-top: 3.5rem; display: flex; justify-content: center; gap: 1.25rem; flex-wrap: wrap;">
-        <button class="btn btn-primary-orange btn-lg" onclick="openCartDrawer();">
-          <i class="fa-solid fa-basket-shopping"></i> Review Your Order in Cart
-        </button>
-        <button class="btn btn-outline-dark btn-lg" onclick="openPosterModal();">
-          <i class="fa-solid fa-book-open"></i> View Restaurant Menu Card
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       WHY CHOOSE US SECTION
-       ========================================================================== -->
-  <section class="section-py-lg bg-charcoal-gradient">
-    <div class="container">
-      <div class="title-center">
-        <span class="section-tag tag-white">
-          <i class="fa-solid fa-shield-halved"></i> The Praise Standard
-        </span>
-        <h2 class="section-title" style="color: var(--pure-white);">Why Choose Praise Restaurant</h2>
-        <div class="divider-flourish">
-          <span></span><i class="fa-solid fa-crown" style="color: var(--food-orange);"></i><span></span>
-        </div>
-        <p class="section-subtitle">
-          We combine ancestral culinary wisdom with impeccable modern hospitality to deliver an unmatched African gastronomic experience.
-        </p>
-      </div>
-
-      <div class="why-us-grid">
-        <div class="why-us-card">
-          <div class="why-icon-box">
-            <i class="fa-solid fa-pepper-hot"></i>
-          </div>
-          <h3 class="why-title">Authentic Flavors</h3>
-          <p class="why-desc">
-            Time-tested generational secret recipes that preserve true West African taste without shortcuts or compromise.
-          </p>
-        </div>
-
-        <div class="why-us-card">
-          <div class="why-icon-box" style="border-color: var(--primary-green); color: var(--primary-green-light);">
-            <i class="fa-solid fa-leaf"></i>
-          </div>
-          <h3 class="why-title">Fresh Ingredients</h3>
-          <p class="why-desc">
-            Prime meats, freshly harvested greens, sun-dried spices, and live seafood sourced directly from trusted markets.
-          </p>
-        </div>
-
-        <div class="why-us-card">
-          <div class="why-icon-box">
-            <i class="fa-solid fa-award"></i>
-          </div>
-          <h3 class="why-title">Exceptional Quality</h3>
-          <p class="why-desc">
-            State-of-the-art hygiene standards, meticulous temperature control, and presentation worthy of royalty.
-          </p>
-        </div>
-
-        <div class="why-us-card">
-          <div class="why-icon-box" style="border-color: var(--primary-green); color: var(--primary-green-light);">
-            <i class="fa-solid fa-bell-concierge"></i>
-          </div>
-          <h3 class="why-title">Professional Catering</h3>
-          <p class="why-desc">
-            Bespoke multi-course culinary catering for weddings, corporate banquets, and celebrations of any size.
-          </p>
-        </div>
-
-        <div class="why-us-card">
-          <div class="why-icon-box">
-            <i class="fa-solid fa-face-smile-beam"></i>
-          </div>
-          <h3 class="why-title">Warm Hospitality</h3>
-          <p class="why-desc">
-            Legendary African hospitality where every guest is welcomed as cherished family from entrance to dessert.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       SPECIAL OFFERS SECTION
-       ========================================================================== -->
-  <section class="section-py bg-cream">
-    <div class="container">
-      <div class="title-center">
-        <span class="section-tag tag-orange">
-          <i class="fa-solid fa-tag"></i> Limited Time Delights
-        </span>
-        <h2 class="section-title">Special Offers & Combos</h2>
-        <div class="divider-flourish">
-          <span></span><i class="fa-solid fa-fire"></i><span></span>
-        </div>
-        <p class="section-subtitle">
-          Enjoy our signature feasts with extraordinary combination savings. Crafted for family banquets and celebratory dinners.
-        </p>
-      </div>
-
-      <div class="offers-grid">
-        <!-- Offer 1 -->
-        <div class="offer-card">
-          <div class="offer-ribbon">Save 20%</div>
-          <div class="offer-media">
-            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Weekend Feast Combo" class="offer-img">
-          </div>
-          <div class="offer-content">
-            <span class="offer-badge"><i class="fa-solid fa-clock"></i> Weekend Special</span>
-            <h3 class="offer-title">Grand Jollof & Peppered Feast</h3>
-            <p class="offer-desc">
-              Smoky Party Jollof Rice + 2 portions of Crispy Peppered Chicken + Fried Sweet Plantain + 2 Chilled Zobo Bottles.
-            </p>
-            <div class="offer-price-row">
-              <div class="price-box">
-                <span class="price-current">₦15,000</span>
-                <span class="price-old">₦19,000</span>
-              </div>
-              <button class="btn btn-primary-orange btn-sm" onclick="addToCart('rice-1', 2); addToCart('meat-1', 2); addToCart('pasta-3', 1); addToCart('drink-1', 2);">
-                <i class="fa-solid fa-cart-plus"></i> Claim Combo
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Offer 2 -->
-        <div class="offer-card">
-          <div class="offer-ribbon">Chef's Choice</div>
-          <div class="offer-media">
-            <img src="https://images.unsplash.com/photo-1547496502-affa22d38842?auto=format&fit=crop&w=800&q=80" alt="Royal Swallow Platter" class="offer-img">
-          </div>
-          <div class="offer-content">
-            <span class="offer-badge"><i class="fa-solid fa-crown"></i> Heritage Platter</span>
-            <h3 class="offer-title">Royal Swallow & Stew Experience</h3>
-            <p class="offer-desc">
-              Royal Egusi Soup & Vegetable Efo Riro + 4 Pounded Yam wraps + Assorted Meats + Free Catfish Pepper Soup bowl.
-            </p>
-            <div class="offer-price-row">
-              <div class="price-box">
-                <span class="price-current">₦18,500</span>
-                <span class="price-old">₦23,000</span>
-              </div>
-              <button class="btn btn-primary-orange btn-sm" onclick="addToCart('soup-1', 1); addToCart('soup-2', 1); addToCart('pep-1', 1);">
-                <i class="fa-solid fa-cart-plus"></i> Claim Combo
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Offer 3 -->
-        <div class="offer-card">
-          <div class="offer-ribbon">Best Value</div>
-          <div class="offer-media">
-            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80" alt="Executive Lunch Box" class="offer-img">
-          </div>
-          <div class="offer-content">
-            <span class="offer-badge"><i class="fa-solid fa-briefcase"></i> Office & Quick Meal</span>
-            <h3 class="offer-title">Executive Asun & Rice Bento</h3>
-            <p class="offer-desc">
-              Native Village Rice with Gizdodo, Peppered Goat Asun, side coleslaw, and refreshing Velvet Tiger Nut Milk.
-            </p>
-            <div class="offer-price-row">
-              <div class="price-box">
-                <span class="price-current">₦21,000</span>
-                <span class="price-old">₦26,000</span>
-              </div>
-              <button class="btn btn-primary-orange btn-sm" onclick="addToCart('rice-3', 1); addToCart('meat-2', 1); addToCart('drink-2', 1);">
-                <i class="fa-solid fa-cart-plus"></i> Claim Combo
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==========================================================================
-       CATERING PROMOTION SECTION
-       ========================================================================== -->
-  <section class="section-py-lg bg-cream-light">
-    <div class="container">
-      <div class="catering-promo-banner">
-        <div class="catering-banner-grid">
-          <div class="catering-banner-text">
-            <span class="section-tag tag-orange">
-              <i class="fa-solid fa-champagne-glasses"></i> Praise Catering Services
-            </span>
-            <h2 class="section-title" style="color: var(--pure-white);">
-              Elevate Your Next Celebration with Authentic African Banquets
-            </h2>
-            <p style="color: rgba(245, 240, 232, 0.85); font-size: 1.05rem; line-height: 1.7;">
-              Planning a wedding, corporate gala, milestone birthday, or VIP private banquet? Praise Restaurant provides complete luxury catering with live cooking stations, opulent buffets, and uniformed culinary staff.
-            </p>
-
-            <div class="catering-perks-list">
-              <div class="catering-perk-item">
-                <i class="fa-solid fa-circle-check"></i>
-                <span>Custom tailored menus from intimate 20-guest soirees to 1,000+ guest banquets</span>
-              </div>
-              <div class="catering-perk-item">
-                <i class="fa-solid fa-circle-check"></i>
-                <span>Live open-flame charcoal Suya & Peppered Grill stations on-site</span>
-              </div>
-              <div class="catering-perk-item">
-                <i class="fa-solid fa-circle-check"></i>
-                <span>Piping hot insulated chafing delivery & professional white-glove service</span>
+          <!-- Slide 2 -->
+          <div class="rev-slide" data-slide="1">
+            <div class="rev-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1920&q=85');"></div>
+            <div class="rev-slide-overlay"></div>
+            <div class="container rev-slide-content">
+              <div class="rev-content-grid">
+                <div class="rev-text-side">
+                  <div class="rev-badge"><i class="fa-solid fa-pepper-hot"></i> Pure Culinary Authenticity</div>
+                  <h2 class="rev-headline">Every Dish Tells a <span>Delicious Story</span></h2>
+                  <p class="rev-subheading">From firewood Nigerian Party Jollof to slow-simmered Royal Egusi and fiery Asun peppered goat meat. Built for real food lovers.</p>
+                  <div class="rev-cta-group">
+                    <a href="#menu" class="btn btn-primary-orange btn-lg" data-view-target="menu">
+                      <i class="fa-solid fa-bowl-food"></i> Discover Dishes
+                    </a>
+                    <button class="btn btn-outline-white btn-lg" onclick="openCartDrawer();">
+                      <i class="fa-solid fa-bag-shopping"></i> View Your Order
+                    </button>
+                  </div>
+                </div>
+                <div class="rev-visual-side">
+                  <div class="rev-main-dish-wrapper">
+                    <img src="https://images.unsplash.com/photo-1547496502-affa22d38842?auto=format&fit=crop&w=800&q=80" alt="Royal African Soup" class="rev-dish-img">
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
 
-            <div style="display: flex; gap: 1.25rem; flex-wrap: wrap;">
-              <a href="services.html#catering-calculator" class="btn btn-primary-orange btn-lg">
-                <i class="fa-solid fa-calculator"></i> Calculate Catering Estimate
-              </a>
-              <a href="contact.html?type=catering" class="btn btn-outline-white btn-lg">
-                <i class="fa-regular fa-calendar-check"></i> Book Catering Inquiry
-              </a>
+          <!-- Slide 3 -->
+          <div class="rev-slide" data-slide="2">
+            <div class="rev-slide-bg" style="background-image: url('https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1920&q=85');"></div>
+            <div class="rev-slide-overlay"></div>
+            <div class="container rev-slide-content">
+              <div class="rev-content-grid">
+                <div class="rev-text-side">
+                  <div class="rev-badge"><i class="fa-solid fa-champagne-glasses"></i> Executive Event Catering</div>
+                  <h2 class="rev-headline">Making Every Occasion <span>Delicious</span></h2>
+                  <p class="rev-subheading">Weddings, birthdays, corporate banquets, and celebrations. Full-scale luxury catering with live open-flame charcoal stations.</p>
+                  <div class="rev-cta-group">
+                    <a href="#catering" class="btn btn-primary-orange btn-lg" data-view-target="catering">
+                      <i class="fa-solid fa-calculator"></i> Calculate Catering Quote
+                    </a>
+                    <a href="#contact" class="btn btn-outline-white btn-lg" data-view-target="contact">
+                      <i class="fa-regular fa-envelope"></i> Contact Us
+                    </a>
+                  </div>
+                </div>
+                <div class="rev-visual-side">
+                  <div class="rev-main-dish-wrapper">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Catering Spread" class="rev-dish-img">
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="catering-banner-media">
-            <img src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1200&q=80" alt="Praise Restaurant Event Catering Buffet" class="catering-banner-img">
+        </div>
+
+        <!-- Slider Controls -->
+        <div class="rev-slider-controls">
+          <div class="container rev-controls-inner">
+            <div class="rev-dots-container">
+              <button class="rev-dot active" aria-label="Slide 1"><span>01</span> Welcome</button>
+              <button class="rev-dot" aria-label="Slide 2"><span>02</span> Cuisine</button>
+              <button class="rev-dot" aria-label="Slide 3"><span>03</span> Catering</button>
+            </div>
+            <div class="rev-slide-nav">
+              <button class="rev-nav-arrow rev-prev-btn" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
+              <button class="rev-nav-arrow rev-next-btn" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
           </div>
         </div>
+        <div class="rev-progress-bar-container"><div class="rev-progress-bar"></div></div>
       </div>
-    </div>
-  </section>
 
-  <!-- ==========================================================================
-       CUSTOMER TESTIMONIALS SECTION
-       ========================================================================== -->
-  <section class="section-py bg-cream">
-    <div class="container">
-      <div class="title-center">
-        <span class="section-tag tag-green">
-          <i class="fa-solid fa-heart"></i> Diners' Praise
-        </span>
-        <h2 class="section-title">What Our Cherished Diners Say</h2>
-        <div class="divider-flourish">
-          <span></span><i class="fa-solid fa-star" style="color: #ffb703;"></i><span></span>
-        </div>
-        <p class="section-subtitle">
-          Read genuine impressions from everyday food enthusiasts, culinary critics, and event organizers who have dined with Praise Restaurant.
-        </p>
-      </div>
-
-      <div class="testimonials-grid">
-        <!-- Testimonial 1 -->
-        <div class="testimonial-card">
-          <i class="fa-solid fa-quote-right quote-icon"></i>
-          <div class="stars-rating">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </div>
-          <p class="testimonial-quote">
-            "Praise Restaurant is an absolute culinary treasure! Their Nigerian Jollof Rice possesses that rare, authentic firewood smokiness that takes you straight back to classic festive banquets. The Egusi soup was thick, rich, and loaded with tender assorted meats."
-          </p>
-          <div class="testimonial-author">
-            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Adeola Balogun" class="author-avatar">
-            <div>
-              <div class="author-name">Adeola Balogun</div>
-              <div class="author-role">Food Critic & Blogger &bull; Victoria Island</div>
+      <!-- Welcome Section -->
+      <section class="section-py bg-cream">
+        <div class="container">
+          <div class="welcome-grid">
+            <div class="welcome-image-stack">
+              <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Praise Restaurant signature dishes" class="welcome-img-primary">
+              <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=800&q=80" alt="Crispy Peppered Meats" class="welcome-img-secondary">
+              <div class="welcome-experience-pill">
+                <div class="exp-years">15+</div>
+                <div class="exp-label">Years of African<br>Culinary Mastery</div>
+              </div>
+            </div>
+            <div class="welcome-content">
+              <span class="section-tag tag-green"><i class="fa-solid fa-leaf"></i> Welcome to Praise</span>
+              <h2 class="section-title">Where African Heritage Meets Modern Artistry</h2>
+              <div class="divider-flourish" style="justify-content: flex-start; margin-left: 0;">
+                <span></span><i class="fa-solid fa-pepper-hot"></i>
+              </div>
+              <p style="font-size: 1.05rem; color: var(--text-dark); line-height: 1.75; margin-bottom: 1.25rem;">
+                At Praise Restaurant, we celebrate the warmth and soul of African gastronomy. Every dish is a rich tribute to traditional recipes cooked with organic local farm produce and stone-ground spices.
+              </p>
+              <div class="welcome-features">
+                <div class="feature-pill-card">
+                  <div class="feature-pill-icon"><i class="fa-solid fa-seedling"></i></div>
+                  <div><div class="feature-pill-title">Farm-Fresh Harvest</div><div class="feature-pill-desc">Hand-picked daily from local sustainable farms.</div></div>
+                </div>
+                <div class="feature-pill-card">
+                  <div class="feature-pill-icon"><i class="fa-solid fa-fire-burner"></i></div>
+                  <div><div class="feature-pill-title">Firewood Smoke Infused</div><div class="feature-pill-desc">Genuine party Jollof aroma you can smell and savor.</div></div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem;">
+                <a href="#menu" class="btn btn-primary-green" data-view-target="menu"><i class="fa-solid fa-bowl-food"></i> Explore Menu</a>
+                <a href="#about" class="btn btn-outline-dark" data-view-target="about"><i class="fa-solid fa-book-open"></i> Read Heritage Story</a>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- Testimonial 2 -->
-        <div class="testimonial-card">
-          <i class="fa-solid fa-quote-right quote-icon"></i>
-          <div class="stars-rating">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+      <!-- Special Combos -->
+      <section class="section-py bg-cream-light">
+        <div class="container">
+          <div class="title-center">
+            <span class="section-tag tag-orange"><i class="fa-solid fa-tag"></i> Chef's Bundles</span>
+            <h2 class="section-title">Special Offers & Feasts</h2>
+            <div class="divider-flourish"><span></span><i class="fa-solid fa-fire"></i><span></span></div>
           </div>
-          <p class="testimonial-quote">
-            "We hired Praise Restaurant to cater our corporate banquet for 250 guests. The professionalism was world-class! Every single dish arrived piping hot, beautifully presented, and the live peppered meats station was the talk of the entire evening."
-          </p>
-          <div class="testimonial-author">
-            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Chukwuma Nwosu" class="author-avatar">
-            <div>
-              <div class="author-name">Chukwuma Nwosu</div>
-              <div class="author-role">MD, Apex Capital &bull; Lekki Phase 1</div>
+          <div class="offers-grid">
+            <div class="offer-card">
+              <div class="offer-ribbon">Save 20%</div>
+              <div class="offer-media"><img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Jollof Feast" class="offer-img"></div>
+              <div class="offer-content">
+                <span class="offer-badge"><i class="fa-solid fa-clock"></i> Weekend Special</span>
+                <h3 class="offer-title">Grand Jollof & Peppered Feast</h3>
+                <p class="offer-desc">Party Jollof + 2 Peppered Chicken + Fried Dodo + 2 Zobo Bottles.</p>
+                <div class="offer-price-row">
+                  <div class="price-box"><span class="price-current">₦15,000</span><span class="price-old">₦19,000</span></div>
+                  <button class="btn btn-primary-orange btn-sm" onclick="addToCart('rice-1', 2); addToCart('meat-1', 2); addToCart('drink-1', 2); openCartDrawer();">
+                    <i class="fa-solid fa-cart-plus"></i> Claim Combo
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="offer-card">
+              <div class="offer-ribbon">Chef's Choice</div>
+              <div class="offer-media"><img src="https://images.unsplash.com/photo-1547496502-affa22d38842?auto=format&fit=crop&w=800&q=80" alt="Swallow Platter" class="offer-img"></div>
+              <div class="offer-content">
+                <span class="offer-badge"><i class="fa-solid fa-crown"></i> Heritage Platter</span>
+                <h3 class="offer-title">Royal Swallow & Stew Experience</h3>
+                <p class="offer-desc">Royal Egusi & Efo Riro + 4 Pounded Yam + Assorted Meats + Free Pepper Soup.</p>
+                <div class="offer-price-row">
+                  <div class="price-box"><span class="price-current">₦18,500</span><span class="price-old">₦23,000</span></div>
+                  <button class="btn btn-primary-orange btn-sm" onclick="addToCart('soup-1', 1); addToCart('soup-2', 1); addToCart('pep-1', 1); openCartDrawer();">
+                    <i class="fa-solid fa-cart-plus"></i> Claim Combo
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+      </section>
 
-        <!-- Testimonial 3 -->
-        <div class="testimonial-card">
-          <i class="fa-solid fa-quote-right quote-icon"></i>
-          <div class="stars-rating">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+      <!-- Why Choose Us -->
+      <section class="section-py bg-charcoal-gradient">
+        <div class="container">
+          <div class="title-center">
+            <span class="section-tag tag-white"><i class="fa-solid fa-shield-halved"></i> The Praise Standard</span>
+            <h2 class="section-title" style="color: var(--pure-white);">Why Food Lovers Choose Praise</h2>
+            <div class="divider-flourish"><span></span><i class="fa-solid fa-crown" style="color: var(--food-orange);"></i><span></span></div>
           </div>
-          <p class="testimonial-quote">
-            "Their Catfish Pepper Soup with fresh scent leaves was therapeutic and pure. Their Tiger Nut Milk is velvety perfection. A truly authentic five-star experience that honors African culinary traditions without compromise."
-          </p>
-          <div class="testimonial-author">
-            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80" alt="Dr. Fatima Al-Hassan" class="author-avatar">
-            <div>
-              <div class="author-name">Dr. Fatima Al-Hassan</div>
-              <div class="author-role">Diners Club Member &bull; Ikoyi</div>
+          <div class="why-us-grid">
+            <div class="why-us-card"><div class="why-icon-box"><i class="fa-solid fa-pepper-hot"></i></div><h3 class="why-title">Authentic Flavors</h3><p class="why-desc">Generational secret recipes preserving true West African taste.</p></div>
+            <div class="why-us-card"><div class="why-icon-box" style="border-color: var(--primary-green); color: var(--primary-green-light);"><i class="fa-solid fa-leaf"></i></div><h3 class="why-title">Fresh Ingredients</h3><p class="why-desc">Direct daily farm sourcing, prime butcher cuts, and live catfish.</p></div>
+            <div class="why-us-card"><div class="why-icon-box"><i class="fa-solid fa-award"></i></div><h3 class="why-title">Exceptional Quality</h3><p class="why-desc">ISO hygiene standards and slow artisanal reduction methods.</p></div>
+            <div class="why-us-card"><div class="why-icon-box" style="border-color: var(--primary-green); color: var(--primary-green-light);"><i class="fa-solid fa-bell-concierge"></i></div><h3 class="why-title">Professional Catering</h3><p class="why-desc">Bespoke catering for 20 to 1,000+ guests with live stations.</p></div>
+            <div class="why-us-card"><div class="why-icon-box"><i class="fa-solid fa-face-smile-beam"></i></div><h3 class="why-title">Warm Hospitality</h3><p class="why-desc">Legendary African hospitality where every guest is cherished.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Diner Testimonials -->
+      <section class="section-py bg-cream">
+        <div class="container">
+          <div class="title-center">
+            <span class="section-tag tag-green"><i class="fa-solid fa-heart"></i> Diners' Praise</span>
+            <h2 class="section-title">What Our Guests Are Saying</h2>
+            <div class="divider-flourish"><span></span><i class="fa-solid fa-star" style="color: #ffb703;"></i><span></span></div>
+          </div>
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <i class="fa-solid fa-quote-right quote-icon"></i>
+              <div class="stars-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <p class="testimonial-quote">"Praise Restaurant is an absolute culinary treasure! Their Nigerian Jollof Rice possesses that rare, authentic firewood smokiness that takes you straight back to classic festive banquets."</p>
+              <div class="testimonial-author">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Adeola" class="author-avatar">
+                <div><div class="author-name">Adeola Balogun</div><div class="author-role">Food Critic &bull; Victoria Island</div></div>
+              </div>
+            </div>
+            <div class="testimonial-card">
+              <i class="fa-solid fa-quote-right quote-icon"></i>
+              <div class="stars-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+              <p class="testimonial-quote">"We hired Praise Restaurant to cater our corporate banquet for 250 guests. The professionalism was world-class! Every single dish arrived piping hot and the live grill was legendary."</p>
+              <div class="testimonial-author">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Chukwuma" class="author-avatar">
+                <div><div class="author-name">Chukwuma Nwosu</div><div class="author-role">Managing Director &bull; Lekki</div></div>
+              </div>
             </div>
           </div>
         </div>
+      </section>
+    </section>
 
-        <!-- Testimonial 4 -->
-        <div class="testimonial-card">
-          <i class="fa-solid fa-quote-right quote-icon"></i>
-          <div class="stars-rating">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </div>
-          <p class="testimonial-quote">
-            "From the cozy ambient lighting in their dine-in lounge to the warm hospitality of the staff, dining here is always a pure joy. The Gizdodo and Grilled Croaker Fish are out of this world. We can never get enough!"
-          </p>
-          <div class="testimonial-author">
-            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=200&q=80" alt="Olumide & Funke Martins" class="author-avatar">
-            <div>
-              <div class="author-name">Olumide & Funke Martins</div>
-              <div class="author-role">Regular Diners &bull; Ikeja GRA</div>
-            </div>
-          </div>
+    <!-- ========================================================================
+         VIEW 2: MENU EXPLORER (#menu)
+         ======================================================================== -->
+    <section class="app-view" id="view-menu">
+      <div class="container section-py">
+        <div class="title-center">
+          <span class="section-tag tag-orange"><i class="fa-solid fa-utensils"></i> Live Digital Menu</span>
+          <h2 class="section-title">Explore & Customize Your Feast</h2>
+          <div class="divider-flourish"><span></span><i class="fa-solid fa-pepper-hot"></i><span></span></div>
+          <p class="section-subtitle">Click on any dish to customize your swallow, choose your spice level, and add extra portions.</p>
         </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- ==========================================================================
-       CALL TO ACTION SECTION
-       ========================================================================== -->
-  <section class="section-py bg-cream-light">
-    <div class="container">
-      <div class="cta-banner-wrapper">
-        <h2 class="cta-headline">Your Next Delicious Meal Awaits!</h2>
-        <p class="cta-subtext">
-          Craving the unmistakable smokiness of firewood party jollof, the hearty comfort of rich royal egusi, or sizzling peppered delicacies? Order now for express hot delivery or reserve your table.
-        </p>
-        <div class="cta-btn-group">
+        <!-- Search input inside menu -->
+        <div style="max-width: 600px; margin: 0 auto 2rem auto; position: relative;">
+          <i class="fa-solid fa-magnifying-glass" style="position: absolute; top: 50%; left: 16px; transform: translateY(-50%); color: var(--text-muted);"></i>
+          <input type="text" id="menuSearchInput" class="form-control" style="padding-left: 2.8rem; border-radius: 999px; height: 52px; font-size: 1rem;" placeholder="Search dishes by name (e.g. Jollof, Egusi, Pepper Soup, Catfish)...">
+        </div>
+
+        <!-- Category Tabs -->
+        <nav class="menu-filter-nav" aria-label="Menu Filter">
+          <button class="filter-tab-btn active" data-filter="all"><i class="fa-solid fa-border-all"></i> All Items</button>
+          <button class="filter-tab-btn" data-filter="rice"><i class="fa-solid fa-bowl-rice"></i> Rice Dishes</button>
+          <button class="filter-tab-btn" data-filter="swallows"><i class="fa-solid fa-bowl-food"></i> Soups & Swallows</button>
+          <button class="filter-tab-btn" data-filter="meats"><i class="fa-solid fa-drumstick-bite"></i> Peppered Meats</button>
+          <button class="filter-tab-btn" data-filter="peppersoup"><i class="fa-solid fa-mug-hot"></i> Pepper Soups</button>
+          <button class="filter-tab-btn" data-filter="pasta"><i class="fa-solid fa-wheat-awn"></i> Pasta & Sides</button>
+          <button class="filter-tab-btn" data-filter="drinks"><i class="fa-solid fa-martini-glass-citrus"></i> Beverages</button>
+        </nav>
+
+        <!-- Dietary Chips -->
+        <div class="dietary-chips-row">
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted); margin-right: 0.5rem;">Dietary Tag:</span>
+          <button class="dietary-chip active" data-dietary="all">All</button>
+          <button class="dietary-chip" data-dietary="spicy"><i class="fa-solid fa-pepper-hot" style="color: var(--food-orange);"></i> Spicy Delicacies</button>
+          <button class="dietary-chip" data-dietary="special"><i class="fa-solid fa-crown" style="color: var(--primary-green);"></i> Chef's Special</button>
+          <button class="dietary-chip" data-dietary="popular"><i class="fa-solid fa-fire" style="color: var(--food-orange);"></i> Popular Picks</button>
+        </div>
+
+        <!-- Dishes Grid -->
+        <div class="dishes-grid" id="dishesGrid"></div>
+
+        <div style="text-align: center; margin-top: 3.5rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
           <button class="btn btn-primary-orange btn-lg" onclick="openCartDrawer();">
-            <i class="fa-solid fa-bag-shopping"></i> Order Your Favorite Meal
+            <i class="fa-solid fa-basket-shopping"></i> View Your Order in Cart
           </button>
-          <button class="btn btn-outline-white btn-lg open-reservation-trigger">
-            <i class="fa-regular fa-calendar-check"></i> Reserve a Table Today
+          <button class="btn btn-outline-dark btn-lg" onclick="openPosterModal();">
+            <i class="fa-solid fa-image"></i> View Menu Poster
           </button>
         </div>
       </div>
+    </section>
+
+    <!-- ========================================================================
+         VIEW 3: TABLE RESERVATION STUDIO (#reserve)
+         ======================================================================== -->
+    <section class="app-view" id="view-reserve">
+      <div class="container section-py">
+        <div class="title-center">
+          <span class="section-tag tag-green"><i class="fa-regular fa-calendar-check"></i> VIP Hospitality</span>
+          <h2 class="section-title">Interactive Table Reservation Studio</h2>
+          <div class="divider-flourish"><span></span><i class="fa-solid fa-chair"></i><span></span></div>
+          <p class="section-subtitle">Select your preferred dining ambiance, time slot, and guest count for an unforgettable dining experience.</p>
+        </div>
+
+        <div id="tableStudioFormWrapper" style="max-width: 820px; margin: 0 auto;">
+          <form onsubmit="handleTableStudioSubmit(event)" style="background: var(--pure-white); padding: 2.5rem; border-radius: var(--border-radius-xl); box-shadow: var(--shadow-xl); border: 1px solid var(--warm-cream-border);">
+            
+            <h4 style="font-weight: 800; font-size: 1.1rem; margin-bottom: 1rem; color: var(--text-dark);">
+              1. Choose Your Dining Area
+            </h4>
+            <div class="seating-areas-grid">
+              <div class="seating-card-option active" data-area="Main Dining Hall">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=400&q=80" alt="Main Hall" class="seating-card-img">
+                <div class="seating-card-body">
+                  <div class="seating-card-title">Main Dining Hall</div>
+                  <div class="seating-card-desc">Warm lighting, afro-soul music & festive dining.</div>
+                </div>
+              </div>
+              <div class="seating-card-option" data-area="VIP Private Lounge">
+                <img src="https://images.unsplash.com/photo-1578474846511-04ba529f0b88?auto=format&fit=crop&w=400&q=80" alt="VIP Lounge" class="seating-card-img">
+                <div class="seating-card-body">
+                  <div class="seating-card-title">VIP Private Lounge</div>
+                  <div class="seating-card-desc">Quiet luxury, secluded booths & dedicated waiter.</div>
+                </div>
+              </div>
+              <div class="seating-card-option" data-area="Outdoor Terrace Garden">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=400&q=80" alt="Garden Terrace" class="seating-card-img">
+                <div class="seating-card-body">
+                  <div class="seating-card-title">Terrace Garden</div>
+                  <div class="seating-card-desc">Open-air evening breeze under fairy lights.</div>
+                </div>
+              </div>
+            </div>
+
+            <h4 style="font-weight: 800; font-size: 1.1rem; margin-bottom: 1rem; color: var(--text-dark);">
+              2. Select Time Slot
+            </h4>
+            <div class="time-slots-grid">
+              <div class="time-slot-btn" data-time="12:30 PM">12:30 PM</div>
+              <div class="time-slot-btn" data-time="1:30 PM">1:30 PM</div>
+              <div class="time-slot-btn" data-time="3:00 PM">3:00 PM</div>
+              <div class="time-slot-btn" data-time="6:00 PM">6:00 PM</div>
+              <div class="time-slot-btn active" data-time="7:30 PM">7:30 PM</div>
+              <div class="time-slot-btn" data-time="9:00 PM">9:00 PM</div>
+            </div>
+
+            <h4 style="font-weight: 800; font-size: 1.1rem; margin-bottom: 1rem; color: var(--text-dark);">
+              3. Guest & Contact Information
+            </h4>
+            <div class="form-group-row">
+              <div class="form-group">
+                <label class="form-label">Full Name *</label>
+                <input type="text" name="studioName" class="form-control" placeholder="e.g. Babatunde Adeleke" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Phone Number (For Pass SMS/WhatsApp) *</label>
+                <input type="tel" name="studioPhone" class="form-control" placeholder="e.g. 0812 345 6789" required>
+              </div>
+            </div>
+
+            <div class="form-group-row">
+              <div class="form-group">
+                <label class="form-label">Reservation Date *</label>
+                <input type="date" name="studioDate" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Number of Guests *</label>
+                <select name="studioGuests" class="form-control">
+                  <option value="1">1 Guest (Solo Dining)</option>
+                  <option value="2" selected>2 Guests (Date / Couple)</option>
+                  <option value="4">4 Guests (Family / Friends)</option>
+                  <option value="6">6 Guests</option>
+                  <option value="8">8 Guests</option>
+                  <option value="12">12 Guests (Large Table)</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary-green btn-lg" style="width: 100%; margin-top: 1rem;">
+              <i class="fa-solid fa-qrcode"></i> Confirm Reservation & Generate Digital Pass
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         VIEW 4: CATERING STUDIO (#catering)
+         ======================================================================== -->
+    <section class="app-view" id="view-catering">
+      <div class="container section-py">
+        <div class="title-center">
+          <span class="section-tag tag-orange"><i class="fa-solid fa-champagne-glasses"></i> Executive Event Production</span>
+          <h2 class="section-title">Praise Catering Studio & Calculator</h2>
+          <div class="divider-flourish"><span></span><i class="fa-solid fa-calculator" style="color: var(--food-orange);"></i><span></span></div>
+          <p class="section-subtitle">Plan your banquet budget with transparent per-guest pricing and live station add-ons.</p>
+        </div>
+
+        <!-- Interactive Calculator -->
+        <div class="catering-calc-card">
+          <div class="calc-grid">
+            <div>
+              <div class="calc-input-group">
+                <div class="calc-label">
+                  <span>1. Expected Number of Guests</span>
+                  <span id="calcGuestsCountDisplay" style="color: var(--food-orange); font-size: 1.15rem;">100 Guests</span>
+                </div>
+                <input type="range" min="20" max="500" step="10" value="100" class="calc-slider" id="cateringGuestsSlider">
+              </div>
+
+              <div class="calc-input-group">
+                <div class="calc-label"><span>2. Select Banquet Package Tier</span></div>
+                <div class="tier-select-grid">
+                  <div class="tier-btn-radio" data-price="8500" data-name="Silver Heritage Banquet">
+                    <div class="tier-radio-name">Silver Heritage</div>
+                    <div class="tier-radio-price">₦8,500 / guest</div>
+                    <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem;">2 Rice, 1 Soup, Chicken</div>
+                  </div>
+                  <div class="tier-btn-radio active" data-price="14500" data-name="Gold Celebration Feast">
+                    <div class="tier-radio-name">Gold Celebration</div>
+                    <div class="tier-radio-price">₦14,500 / guest</div>
+                    <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem;">Full Rice & Meat Bar</div>
+                  </div>
+                  <div class="tier-btn-radio" data-price="22000" data-name="Imperial Royal Gala">
+                    <div class="tier-radio-name">Imperial Royal</div>
+                    <div class="tier-radio-price">₦22,000 / guest</div>
+                    <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 0.2rem;">Live Suya + 5 Courses</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="calc-result-box">
+                <div class="calc-est-label">Estimated Catering Total</div>
+                <div class="calc-est-total" id="calcEstTotalDisplay">₦1,450,000</div>
+                <div class="calc-est-guests" id="calcEstGuestsSubDisplay">Estimated total for 100 guests on Gold Celebration Feast</div>
+                <a href="#contact" class="btn btn-primary-orange btn-lg" data-view-target="contact" style="width: 100%;">
+                  <i class="fa-solid fa-file-invoice"></i> Request Formal Proposal
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         VIEW 5: OUR HERITAGE (#about)
+         ======================================================================== -->
+    <section class="app-view" id="view-about">
+      <div class="container section-py">
+        <div class="story-timeline-grid">
+          <div>
+            <span class="section-tag tag-green"><i class="fa-solid fa-utensils"></i> Generational Roots</span>
+            <h2 class="section-title">The Praise Culinary Story</h2>
+            <div class="divider-flourish" style="justify-content: flex-start; margin-left: 0;"><span></span><i class="fa-solid fa-fire"></i></div>
+            <p class="story-lead-p">Praise Restaurant was founded on a deep devotion to ancestral West African culinary arts, patient slow-cooking, and pure native spices.</p>
+            <p class="story-body-p">Inspired by grandmother's wood-fired clay pots, our kitchen rejects artificial flavor cubes and shortcuts. Every sauce is coaxed into rich, aromatic perfection using locust beans, dried crayfish, uziza seeds, and fresh peppers.</p>
+          </div>
+          <div>
+            <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80" alt="Chefs Cooking" style="width: 100%; border-radius: var(--border-radius-xl); box-shadow: var(--shadow-xl);">
+          </div>
+        </div>
+
+        <div class="mission-vision-grid" style="margin-top: 3.5rem;">
+          <div class="mission-card">
+            <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--primary-green); margin-bottom: 0.5rem;">Our Mission</h3>
+            <p style="color: var(--text-muted); line-height: 1.7;">To deliver soul-enriching, authentically crafted African cuisine prepared with uncompromising culinary integrity, honoring ancestral heritage while providing world-class hospitality.</p>
+          </div>
+          <div class="mission-card vision">
+            <h3 style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--food-orange); margin-bottom: 0.5rem;">Our Vision</h3>
+            <p style="color: var(--text-muted); line-height: 1.7;">To stand globally as the gold benchmark of African dining, uniting cultures around joyful banquet tables with unadulterated flavors.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         VIEW 6: CONTACT & MAP (#contact)
+         ======================================================================== -->
+    <section class="app-view" id="view-contact">
+      <div class="container section-py">
+        <div class="contact-layout-grid">
+          <div>
+            <span class="section-tag tag-green"><i class="fa-solid fa-address-book"></i> Connect Directly</span>
+            <h2 class="section-title">Get in Touch</h2>
+            <div class="divider-flourish" style="justify-content: flex-start; margin-left: 0;"><span></span><i class="fa-solid fa-location-dot"></i></div>
+            
+            <div class="contact-info-panel">
+              <div class="contact-info-card">
+                <div class="contact-icon-box" style="background: var(--food-orange);"><i class="fa-solid fa-phone"></i></div>
+                <div><h3 class="contact-card-title">Phone & Orders Hotline</h3><p class="contact-card-text">+234 812 345 6789 &bull; +234 (0) 800-PRAISE-NG</p></div>
+              </div>
+              <div class="contact-info-card">
+                <div class="contact-icon-box" style="background: var(--primary-green);"><i class="fa-regular fa-envelope"></i></div>
+                <div><h3 class="contact-card-title">Email Inquiries</h3><p class="contact-card-text">orders@praiserestaurant.com &bull; catering@praiserestaurant.com</p></div>
+              </div>
+              <div class="contact-info-card">
+                <div class="contact-icon-box" style="background: var(--dark-charcoal);"><i class="fa-solid fa-location-dot"></i></div>
+                <div><h3 class="contact-card-title">Address</h3><p class="contact-card-text">14 Admiralty Way, Lekki Phase 1, Lagos, Nigeria</p></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form-wrapper">
+            <h3 style="font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; margin-bottom: 1.25rem;">Send Us a Message</h3>
+            <form id="contactForm" novalidate>
+              <div class="form-group"><label class="form-label">Full Name *</label><input type="text" name="fullName" class="form-control" required></div>
+              <div class="form-group"><label class="form-label">Email Address *</label><input type="email" name="email" class="form-control" required></div>
+              <div class="form-group"><label class="form-label">Phone Number *</label><input type="tel" name="phone" class="form-control" required></div>
+              <div class="form-group"><label class="form-label">Message *</label><textarea name="message" class="form-control" required></textarea></div>
+              <button type="submit" class="btn btn-primary-orange btn-lg" style="width: 100%;"><i class="fa-solid fa-paper-plane"></i> Submit Message</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Embedded Map -->
+        <div class="map-container" style="margin-top: 3.5rem;">
+          <iframe title="Map" width="100%" height="100%" style="border:0;" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=3.4600%2C6.4400%2C3.4850%2C6.4600&amp;layer=mapnik&amp;marker=6.4500%2C3.4720"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         VIEW 7: LIVE KITCHEN ORDER TRACKER (#tracker)
+         ======================================================================== -->
+    <section class="app-view" id="view-tracker">
+      <div class="container section-py">
+        <div class="title-center">
+          <span class="section-tag tag-green"><i class="fa-solid fa-truck-fast"></i> Live Dispatch Tracking</span>
+          <h2 class="section-title">Track Your Meal in Real Time</h2>
+          <div class="divider-flourish"><span></span><i class="fa-solid fa-fire"></i><span></span></div>
+        </div>
+
+        <div class="tracker-card">
+          <div class="tracker-header">
+            <div>
+              <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 800;">Order Reference</span>
+              <div class="tracker-id-badge" id="trackerOrderIdDisplay">#PRAISE-582910</div>
+            </div>
+            <div class="tracker-eta-box">
+              <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 800;">Estimated Arrival</span>
+              <div class="tracker-eta-val" id="trackerEtaDisplay">25 mins</div>
+            </div>
+          </div>
+
+          <!-- Stepper -->
+          <div class="tracker-stepper">
+            <div class="tracker-step completed" id="step-received">
+              <div class="tracker-step-icon"><i class="fa-solid fa-receipt"></i></div>
+              <div><div class="tracker-step-title">Order Received & Confirmed</div><div class="tracker-step-desc">Sent to kitchen prep station.</div></div>
+            </div>
+            <div class="tracker-step active" id="step-cooking">
+              <div class="tracker-step-icon"><i class="fa-solid fa-fire-burner"></i></div>
+              <div><div class="tracker-step-title">Chef Simmering & Slow Braising</div><div class="tracker-step-desc">Firewood smoke aroma infusing your meal.</div></div>
+            </div>
+            <div class="tracker-step" id="step-packaged">
+              <div class="tracker-step-icon"><i class="fa-solid fa-box"></i></div>
+              <div><div class="tracker-step-title">Quality Sealed in Thermal Warmer</div><div class="tracker-step-desc">Locking in peak freshness and temperature.</div></div>
+            </div>
+            <div class="tracker-step" id="step-dispatch">
+              <div class="tracker-step-icon"><i class="fa-solid fa-motorcycle"></i></div>
+              <div><div class="tracker-step-title">Express Courier Dispatched</div><div class="tracker-step-desc">On route to your destination.</div></div>
+            </div>
+          </div>
+
+          <!-- Rider Info -->
+          <div class="tracker-rider-card">
+            <div class="rider-info">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Courier" class="rider-avatar">
+              <div>
+                <strong style="font-size: 1rem; color: var(--text-dark);">Babajide Sanusi</strong><br>
+                <small style="color: var(--text-muted);">Praise Express Fleet &bull; TVS Apache (LK-842-APP)</small>
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.6rem;">
+              <a href="tel:+2348123456789" class="btn btn-primary-green btn-sm"><i class="fa-solid fa-phone"></i> Call Driver</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         VIEW 8: FAVORITES (#favorites)
+         ======================================================================== -->
+    <section class="app-view" id="view-favorites">
+      <div class="container section-py">
+        <div class="title-center">
+          <span class="section-tag tag-orange"><i class="fa-solid fa-heart" style="color: #ff6b6b;"></i> Saved Cravings</span>
+          <h2 class="section-title">Your Favorite African Dishes</h2>
+          <div class="divider-flourish"><span></span><i class="fa-solid fa-star"></i><span></span></div>
+          <p class="section-subtitle">Quick 1-tap reordering of the delicacies you love most.</p>
+        </div>
+        <div class="dishes-grid" id="favoritesGrid"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       MOBILE BOTTOM NAVIGATION BAR (NATIVE APP FEEL)
+       ========================================================================== -->
+  <nav class="mobile-bottom-nav" aria-label="Mobile Bottom App Navigation">
+    <div class="mobile-bottom-nav-inner">
+      <a href="#home" class="bottom-nav-item active" data-view-target="home">
+        <i class="fa-solid fa-house"></i>
+        <span>Home</span>
+      </a>
+      <a href="#menu" class="bottom-nav-item" data-view-target="menu">
+        <i class="fa-solid fa-bowl-food"></i>
+        <span>Menu</span>
+      </a>
+      <a href="#reserve" class="bottom-nav-item" data-view-target="reserve">
+        <i class="fa-regular fa-calendar-days"></i>
+        <span>Reserve</span>
+      </a>
+      <a href="#catering" class="bottom-nav-item" data-view-target="catering">
+        <i class="fa-solid fa-champagne-glasses"></i>
+        <span>Catering</span>
+      </a>
+      <a href="#" class="bottom-nav-item cart-toggle-btn">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span>Cart</span>
+        <span class="bottom-nav-badge cart-badge-count">0</span>
+      </a>
     </div>
-  </section>
+  </nav>
 
   <!-- ==========================================================================
        FOOTER
@@ -781,109 +795,53 @@
   <footer class="site-footer">
     <div class="container">
       <div class="footer-top-grid">
-        <!-- Col 1: Brand & Bio -->
         <div>
-          <a href="index.html" class="brand-logo" style="margin-bottom: 1rem;">
-            <div class="brand-crest">
-              <i class="fa-solid fa-utensils"></i>
-            </div>
+          <a href="#home" class="brand-logo" data-view-target="home" style="margin-bottom: 1rem;">
+            <div class="brand-crest"><i class="fa-solid fa-utensils"></i></div>
             <div class="brand-text">
               <span class="brand-name">PRAISE <span>RESTAURANT</span></span>
               <span class="brand-tagline">Authentic African Cuisine</span>
             </div>
           </a>
-          <p class="footer-brand-desc">
-            Praise Restaurant celebrates the rich, diverse flavors of Africa. Freshly prepared with passion, authentic spices, and heartfelt hospitality.
-          </p>
-          <div class="footer-social-links">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-link-btn" aria-label="Instagram">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-link-btn" aria-label="Facebook">
-              <i class="fa-brands fa-facebook-f"></i>
-            </a>
-            <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="social-link-btn" aria-label="TikTok">
-              <i class="fa-brands fa-tiktok"></i>
-            </a>
-            <a href="https://wa.me/2348123456789" target="_blank" rel="noopener noreferrer" class="social-link-btn" aria-label="WhatsApp">
-              <i class="fa-brands fa-whatsapp"></i>
-            </a>
-          </div>
+          <p class="footer-brand-desc">Authentic African cuisine, wood-smoked Jollof, royal stews, and professional catering.</p>
         </div>
-
-        <!-- Col 2: Quick Links -->
         <div>
-          <h4 class="footer-col-title">Quick Links</h4>
+          <h4 class="footer-col-title">Quick Views</h4>
           <ul class="footer-link-list">
-            <li class="footer-link-item"><a href="index.html"><i class="fa-solid fa-angle-right"></i> Home</a></li>
-            <li class="footer-link-item"><a href="about.html"><i class="fa-solid fa-angle-right"></i> About Our Story</a></li>
-            <li class="footer-link-item"><a href="services.html"><i class="fa-solid fa-angle-right"></i> Our Services & Catering</a></li>
-            <li class="footer-link-item"><a href="contact.html"><i class="fa-solid fa-angle-right"></i> Contact & Location</a></li>
-            <li class="footer-link-item"><a href="#popular-dishes"><i class="fa-solid fa-angle-right"></i> Online Food Menu</a></li>
+            <li class="footer-link-item"><a href="#home" data-view-target="home"><i class="fa-solid fa-angle-right"></i> Home</a></li>
+            <li class="footer-link-item"><a href="#menu" data-view-target="menu"><i class="fa-solid fa-angle-right"></i> Menu Explorer</a></li>
+            <li class="footer-link-item"><a href="#reserve" data-view-target="reserve"><i class="fa-solid fa-angle-right"></i> Book Table</a></li>
+            <li class="footer-link-item"><a href="#catering" data-view-target="catering"><i class="fa-solid fa-angle-right"></i> Catering Studio</a></li>
+            <li class="footer-link-item"><a href="#tracker" data-view-target="tracker"><i class="fa-solid fa-angle-right"></i> Order Tracker</a></li>
           </ul>
         </div>
-
-        <!-- Col 3: Hours & Contact -->
         <div>
           <h4 class="footer-col-title">Opening Hours</h4>
           <ul class="footer-contact-list">
-            <li class="footer-contact-item">
-              <i class="fa-regular fa-clock"></i>
-              <div>
-                <strong>Mon – Thu:</strong><br>
-                10:00 AM – 10:30 PM
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-regular fa-clock"></i>
-              <div>
-                <strong>Fri – Sun:</strong><br>
-                10:00 AM – 11:30 PM
-              </div>
-            </li>
-            <li class="footer-contact-item">
-              <i class="fa-solid fa-location-dot"></i>
-              <div>
-                14 Admiralty Way, Lekki Phase 1, Lagos, Nigeria
-              </div>
-            </li>
+            <li class="footer-contact-item"><i class="fa-regular fa-clock"></i><div><strong>Mon – Thu:</strong> 10:00 AM – 10:30 PM<br><strong>Fri – Sun:</strong> 10:00 AM – 11:30 PM</div></li>
+            <li class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><div>14 Admiralty Way, Lekki Phase 1, Lagos</div></li>
           </ul>
         </div>
-
-        <!-- Col 4: Newsletter -->
         <div>
-          <h4 class="footer-col-title">Stay Connected</h4>
-          <p class="newsletter-desc">
-            Subscribe for exclusive weekend discounts, chef tasting invites, and catering seasonal specials.
-          </p>
+          <h4 class="footer-col-title">Vouchers & Deals</h4>
+          <p class="newsletter-desc">Use code <strong>PRAISE10</strong> in cart for 10% off your first meal!</p>
           <form class="newsletter-form-inline">
-            <input type="email" class="newsletter-input" placeholder="Your email address" required aria-label="Email Address">
-            <button type="submit" class="btn btn-primary-orange btn-sm" aria-label="Subscribe">
-              <i class="fa-solid fa-paper-plane"></i>
-            </button>
+            <input type="email" class="newsletter-input" placeholder="Your email address" required>
+            <button type="submit" class="btn btn-primary-orange btn-sm"><i class="fa-solid fa-paper-plane"></i></button>
           </form>
-          <div style="margin-top: 1.25rem; font-size: 0.82rem; color: var(--text-light-muted); display: flex; align-items: center; gap: 0.5rem;">
-            <i class="fa-solid fa-phone" style="color: var(--primary-green-light);"></i>
-            <span>Orders Hotline: <strong>+234 812 345 6789</strong></span>
-          </div>
         </div>
       </div>
-
       <div class="footer-bottom-bar">
-        <div>
-          &copy; <span id="currentYear">2026</span> Praise Restaurant. All Rights Reserved. Crafted with love for authentic African cuisine.
-        </div>
-        <div style="display: flex; gap: 1.5rem;">
-          <a href="#" style="color: var(--text-light-muted);">Privacy Policy</a>
-          <a href="#" style="color: var(--text-light-muted);">Terms of Service</a>
-          <a href="contact.html" style="color: var(--food-orange-light);">Get in Touch</a>
+        <div>&copy; 2026 Praise Restaurant Web App. All Rights Reserved.</div>
+        <div style="display: flex; gap: 1rem;">
+          <a href="images/menu-poster.jpg" target="_blank" style="color: var(--food-orange-light);">Official Menu Poster</a>
         </div>
       </div>
     </div>
   </footer>
 
   <!-- ==========================================================================
-       SHOPPING CART SLIDE-OVER DRAWER
+       SLIDE-OVER SHOPPING CART DRAWER WITH PROMO CODE
        ========================================================================== -->
   <div class="drawer-backdrop" id="cartBackdrop"></div>
   <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping Cart">
@@ -892,37 +850,111 @@
         <i class="fa-solid fa-bag-shopping" style="color: var(--food-orange);"></i>
         <span>Your Food Order</span>
       </div>
-      <button class="cart-close-btn" id="cartCloseBtn" aria-label="Close Order Drawer">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+      <button class="cart-close-btn" id="cartCloseBtn" aria-label="Close Order Drawer"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
-    <div class="cart-items-list" id="cartItemsList">
-      <!-- Populated dynamically by main.js -->
-    </div>
+    <div class="cart-items-list" id="cartItemsList"></div>
 
     <div class="cart-footer">
-      <div class="cart-summary-row">
-        <span>Subtotal</span>
-        <span id="cartSubtotal">₦0</span>
+      <!-- Promo Voucher Input -->
+      <div class="cart-coupon-box">
+        <input type="text" id="cartCouponInput" class="cart-coupon-input" placeholder="Promo code (e.g. PRAISE10)">
+        <button type="button" id="applyCouponBtn" class="cart-coupon-btn">Apply</button>
       </div>
-      <div class="cart-summary-row">
-        <span>Delivery Fee (Orders over ₦25,000 free)</span>
-        <span id="cartDeliveryFee">₦0</span>
-      </div>
-      <div class="cart-summary-row">
-        <span>Estimated VAT (7.5%)</span>
-        <span id="cartVat">₦0</span>
-      </div>
-      <div class="cart-summary-total">
-        <span>Total Due</span>
-        <span id="cartGrandTotal" style="color: var(--food-orange);">₦0</span>
-      </div>
+
+      <div class="cart-summary-row" style="margin-top: 1rem;"><span>Subtotal</span><span id="cartSubtotal">₦0</span></div>
+      <div class="cart-summary-row" id="cartDiscountRow" style="display: none; color: var(--primary-green);"><span>Promo Discount</span><span id="cartDiscountVal">-₦0</span></div>
+      <div class="cart-summary-row"><span>Delivery Fee</span><span id="cartDeliveryFee">₦0</span></div>
+      <div class="cart-summary-row"><span>Estimated VAT (7.5%)</span><span id="cartVat">₦0</span></div>
+      <div class="cart-summary-total"><span>Total Due</span><span id="cartGrandTotal" style="color: var(--food-orange);">₦0</span></div>
+      
       <button class="btn btn-primary-orange btn-lg cart-checkout-btn" id="proceedCheckoutBtn">
         <i class="fa-solid fa-credit-card"></i> Proceed to Checkout
       </button>
     </div>
   </aside>
+
+  <!-- ==========================================================================
+       FOOD CUSTOMIZER MODAL
+       ========================================================================== -->
+  <div class="modal-overlay" id="foodCustomizerModal">
+    <div class="modal-dialog customizer-dialog">
+      <div class="customizer-hero">
+        <img src="" id="customizerImg" alt="Dish" class="customizer-img">
+        <div class="customizer-hero-overlay"></div>
+        <button class="modal-close-btn" onclick="closeModal('foodCustomizerModal')" style="position: absolute; top: 14px; right: 14px; z-index: 5;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="customizer-title-box">
+          <h3 id="customizerTitle" style="font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; margin-bottom: 0.2rem;">Dish Name</h3>
+          <p id="customizerDesc" style="font-size: 0.85rem; color: rgba(255,255,255,0.85); line-height: 1.4;">Dish description</p>
+          <div id="customizerBasePrice" style="font-size: 1.2rem; font-weight: 900; color: var(--food-orange); margin-top: 0.4rem;">₦0</div>
+        </div>
+      </div>
+
+      <div class="modal-body" style="padding: 1.5rem;">
+        <!-- Swallow Selector (Soups only) -->
+        <div id="customizerSwallowSection">
+          <div class="customizer-section-title">
+            <span>Choose Your Swallow</span>
+            <span class="customizer-badge-req">Required</span>
+          </div>
+          <div class="swallow-options-grid">
+            <label class="swallow-radio-label"><input type="radio" name="custSwallow" value="Pounded Yam" checked> Pounded Yam</label>
+            <label class="swallow-radio-label"><input type="radio" name="custSwallow" value="Semovita"> Semovita</label>
+            <label class="swallow-radio-label"><input type="radio" name="custSwallow" value="Eba (Garri)"> Eba (Garri)</label>
+            <label class="swallow-radio-label"><input type="radio" name="custSwallow" value="Fufu"> Fufu</label>
+            <label class="swallow-radio-label"><input type="radio" name="custSwallow" value="Wheat"> Wheat</label>
+          </div>
+        </div>
+
+        <!-- Spice Level -->
+        <div class="customizer-section-title">
+          <span>Spice Level</span>
+        </div>
+        <div class="spice-options-row">
+          <label class="spice-radio-label"><input type="radio" name="custSpice" value="Mild"> 🫑 Mild</label>
+          <label class="spice-radio-label"><input type="radio" name="custSpice" value="Medium" checked> 🌶️ Medium</label>
+          <label class="spice-radio-label"><input type="radio" name="custSpice" value="Hot"> 🌶️🌶️ Hot</label>
+          <label class="spice-radio-label"><input type="radio" name="custSpice" value="Fiery Asun"> 🔥 Extra Fiery</label>
+        </div>
+
+        <!-- Extras & Addons -->
+        <div class="customizer-section-title">
+          <span>Add Extra Portions (Optional)</span>
+        </div>
+        <div class="addon-extras-list">
+          <label class="addon-checkbox-label" onchange="updateCustomizerTotal()">
+            <span>Extra Fried Sweet Plantains (Dodo)</span>
+            <strong style="color: var(--food-orange);">+₦2,000</strong>
+            <input type="checkbox" class="customizer-addon-cb" data-price="2000" data-label="Extra Dodo (+₦2,000)">
+          </label>
+          <label class="addon-checkbox-label" onchange="updateCustomizerTotal()">
+            <span>Extra Peppered Chicken Portion</span>
+            <strong style="color: var(--food-orange);">+₦3,000</strong>
+            <input type="checkbox" class="customizer-addon-cb" data-price="3000" data-label="Extra Peppered Chicken (+₦3,000)">
+          </label>
+          <label class="addon-checkbox-label" onchange="updateCustomizerTotal()">
+            <span>Chilled Artisanal Zobo Drink</span>
+            <strong style="color: var(--food-orange);">+₦2,000</strong>
+            <input type="checkbox" class="customizer-addon-cb" data-price="2000" data-label="Add Zobo Drink (+₦2,000)">
+          </label>
+        </div>
+
+        <!-- Special Instructions -->
+        <div class="form-group" style="margin-bottom: 0;">
+          <label class="form-label">Special Chef Instructions</label>
+          <input type="text" id="customizerNotes" class="form-control" placeholder="e.g. less salt, extra pepper sauce on the side...">
+        </div>
+      </div>
+
+      <div class="customizer-footer">
+        <button class="btn btn-primary-orange btn-lg" id="customizerAddBtn" onclick="submitCustomizedDish()" style="width: 100%;">
+          <i class="fa-solid fa-basket-shopping"></i> Add to Order
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- ==========================================================================
        CHECKOUT MODAL
@@ -931,156 +963,50 @@
     <div class="modal-dialog">
       <div class="modal-header">
         <h3 class="modal-title">Complete Your Food Order</h3>
-        <button class="modal-close-btn" onclick="closeModal('checkoutModal')">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+        <button class="modal-close-btn" onclick="closeModal('checkoutModal')"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="modal-body">
         <div id="checkoutOrderSummary"></div>
-
-        <form id="checkoutForm" onsubmit="handleCheckoutSubmit(event)">
+        <form onsubmit="handleCheckoutSubmit(event)">
           <div class="form-group-row">
-            <div class="form-group">
-              <label class="form-label" for="custName">Full Name *</label>
-              <input type="text" id="custName" name="customerName" class="form-control" placeholder="e.g. Tunde Williams" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="custPhone">Phone Number *</label>
-              <input type="tel" id="custPhone" name="customerPhone" class="form-control" placeholder="e.g. 0812 345 6789" required>
-            </div>
+            <div class="form-group"><label class="form-label">Full Name *</label><input type="text" name="customerName" class="form-control" placeholder="e.g. Tunde Williams" required></div>
+            <div class="form-group"><label class="form-label">Phone Number *</label><input type="tel" name="customerPhone" class="form-control" placeholder="e.g. 0812 345 6789" required></div>
           </div>
-
           <div class="form-group">
-            <label class="form-label" for="orderType">Order Type *</label>
-            <select id="orderType" name="orderType" class="form-control">
-              <option value="delivery">Express Delivery to Doorstep (Hot & Fresh)</option>
-              <option value="pickup">Takeaway Pickup at Praise Restaurant</option>
+            <label class="form-label">Delivery Mode *</label>
+            <select name="orderType" class="form-control">
+              <option value="delivery">Express Hot Doorstep Delivery (Lekki / VI / Ikoyi)</option>
+              <option value="pickup">Curbside Takeaway Pickup (Ready in 20 mins)</option>
             </select>
           </div>
-
+          <div class="form-group"><label class="form-label">Delivery Address / Estate</label><textarea name="customerAddress" class="form-control" placeholder="Street, house number, estate name..." style="min-height: 70px;"></textarea></div>
           <div class="form-group">
-            <label class="form-label" for="custAddress">Delivery Address / Instructions</label>
-            <textarea id="custAddress" name="customerAddress" class="form-control" placeholder="Street name, estate, apartment/house number..." style="min-height: 80px;"></textarea>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="payMethod">Payment Method *</label>
-            <select id="payMethod" name="paymentMethod" class="form-control">
-              <option value="Online Card / Transfer (Paystack / Flutterwave)">Pay Online with Debit Card / USSD</option>
-              <option value="Direct Bank Transfer to Praise Restaurant GTBank">Direct Bank Transfer to Praise GTBank</option>
-              <option value="Cash / POS on Delivery or Pickup">Pay on Delivery / Pickup (POS / Cash)</option>
+            <label class="form-label">Payment Method *</label>
+            <select name="paymentMethod" class="form-control">
+              <option value="Online Card / USSD (Paystack)">Pay Online with Debit Card / USSD</option>
+              <option value="Direct Bank Transfer">Direct Bank Transfer to Praise GTBank</option>
+              <option value="POS / Cash on Delivery">POS / Cash on Delivery</option>
             </select>
           </div>
-
           <button type="submit" class="btn btn-primary-orange btn-lg" style="width: 100%; margin-top: 1rem;">
-            <i class="fa-solid fa-check-circle"></i> Confirm & Place Order
+            <i class="fa-solid fa-circle-check"></i> Confirm & Track Order Live
           </button>
         </form>
       </div>
     </div>
   </div>
 
-  <!-- ==========================================================================
-       TABLE RESERVATION MODAL
-       ========================================================================== -->
-  <div class="modal-overlay" id="reservationModal">
-    <div class="modal-dialog">
-      <div class="modal-header">
-        <h3 class="modal-title">Reserve a Table at Praise Restaurant</h3>
-        <button class="modal-close-btn" onclick="closeModal('reservationModal')">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p style="font-size: 0.92rem; color: var(--text-muted); margin-bottom: 1.5rem;">
-          Join us for an unforgettable dining experience. For parties larger than 12 guests or private dining hall buyouts, please contact our events team.
-        </p>
-
-        <form onsubmit="handleReservationSubmit(event)">
-          <div class="form-group-row">
-            <div class="form-group">
-              <label class="form-label" for="guestName">Full Name *</label>
-              <input type="text" id="guestName" name="guestName" class="form-control" placeholder="e.g. Chioma Eze" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="guestPhone">Phone Number *</label>
-              <input type="tel" id="guestPhone" name="guestPhone" class="form-control" placeholder="e.g. 0803 123 4567" required>
-            </div>
-          </div>
-
-          <div class="form-group-row">
-            <div class="form-group">
-              <label class="form-label" for="resDate">Reservation Date *</label>
-              <input type="date" id="resDate" name="resDate" class="form-control" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="resTime">Preferred Time *</label>
-              <select id="resTime" name="resTime" class="form-control" required>
-                <option value="12:30 PM">12:30 PM (Lunch)</option>
-                <option value="1:30 PM">1:30 PM (Lunch)</option>
-                <option value="3:00 PM">3:00 PM (Afternoon)</option>
-                <option value="6:00 PM">6:00 PM (Dinner)</option>
-                <option value="7:30 PM" selected>7:30 PM (Prime Dinner)</option>
-                <option value="9:00 PM">9:00 PM (Late Dinner)</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group-row">
-            <div class="form-group">
-              <label class="form-label" for="guestCount">Number of Guests *</label>
-              <select id="guestCount" name="guestCount" class="form-control">
-                <option value="1">1 Guest (Solo Dining)</option>
-                <option value="2" selected>2 Guests (Date / Couple)</option>
-                <option value="4">4 Guests (Family / Friends)</option>
-                <option value="6">6 Guests</option>
-                <option value="8">8 Guests</option>
-                <option value="12">12 Guests</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="seatingArea">Seating Preference</label>
-              <select id="seatingArea" name="seatingArea" class="form-control">
-                <option value="Main Dining Hall">Main Dining Hall (Warm & Vibrant)</option>
-                <option value="VIP Private Lounge">VIP Private Lounge (Quiet Luxury)</option>
-                <option value="Outdoor Terrace Garden">Outdoor Terrace Garden</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label class="form-label" for="specialReq">Special Requests (Optional)</label>
-            <input type="text" id="specialReq" name="specialReq" class="form-control" placeholder="e.g. Birthday celebration, anniversary, high chair...">
-          </div>
-
-          <button type="submit" class="btn btn-primary-green btn-lg" style="width: 100%; margin-top: 1rem;">
-            <i class="fa-solid fa-calendar-check"></i> Confirm Reservation
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- ==========================================================================
-       ORIGINAL RESTAURANT MENU POSTER MODAL
-       ========================================================================== -->
+  <!-- Menu Poster Modal -->
   <div class="modal-overlay" id="menuPosterModal">
-    <div class="modal-dialog" style="max-width: 620px;">
+    <div class="modal-dialog" style="max-width: 600px;">
       <div class="modal-header">
-        <h3 class="modal-title">Official Restaurant Menu Card</h3>
-        <button class="modal-close-btn" onclick="closeModal('menuPosterModal')">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+        <h3 class="modal-title">Official Menu Poster</h3>
+        <button class="modal-close-btn" onclick="closeModal('menuPosterModal')"><i class="fa-solid fa-xmark"></i></button>
       </div>
-      <div class="modal-body" style="padding: 1.25rem; text-align: center; background-color: var(--dark-charcoal);">
-        <img src="images/menu-poster.jpg" alt="Praise Restaurant Menu Card" style="max-height: 68vh; margin: 0 auto; border-radius: var(--border-radius-md); box-shadow: var(--shadow-xl); border: 2px solid rgba(255,255,255,0.15);">
-        <div style="margin-top: 1.25rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-          <a href="images/menu-poster.jpg" target="_blank" class="btn btn-primary-orange btn-sm">
-            <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Full High-Res Poster
-          </a>
-          <button class="btn btn-outline-white btn-sm" onclick="closeModal('menuPosterModal')">
-            Close Viewer
-          </button>
+      <div class="modal-body" style="padding: 1rem; text-align: center; background: var(--dark-charcoal);">
+        <img src="images/menu-poster.jpg" alt="Praise Menu" style="max-height: 68vh; margin: 0 auto; border-radius: var(--border-radius-md);">
+        <div style="margin-top: 1rem;">
+          <a href="images/menu-poster.jpg" target="_blank" class="btn btn-primary-orange btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open Full Image</a>
         </div>
       </div>
     </div>
