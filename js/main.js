@@ -8,8 +8,10 @@
 const PraiseState = {
   cart: [],
   favorites: [],
+  currentUser: null,
   cartStorageKey: 'praise_restaurant_cart_v2',
   favStorageKey: 'praise_restaurant_favs_v2',
+  authStorageKey: 'praise_user_session_v1',
   deliveryFee: 1500,
   freeDeliveryThreshold: 25000,
   taxRate: 0.075, // 7.5% Nigerian VAT
@@ -40,6 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initNewsletterForms();
   initPWAInstall();
   initLiveSearch();
+  initAuthSystem();
+  initDownloadAppSystem();
 });
 
 // ==========================================================================
@@ -1159,3 +1163,275 @@ function initNewsletterForms() {
     });
   });
 }
+
+// ==========================================================================
+// 15. CUSTOMER AUTHENTICATION & VIP LOYALTY SYSTEM
+// ==========================================================================
+function escapeHTML(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+function initAuthSystem() {
+  try {
+    const session = localStorage.getItem(PraiseState.authStorageKey);
+    if (session) {
+      PraiseState.currentUser = JSON.parse(session);
+    }
+  } catch (e) {
+    PraiseState.currentUser = null;
+  }
+  updateAuthUI();
+}
+
+function updateAuthUI() {
+  const topbarLabel = document.getElementById('topbarAuthLabel');
+  const drawerLabel = document.getElementById('mobileAuthLabel');
+
+  if (PraiseState.currentUser) {
+    const u = PraiseState.currentUser;
+    const firstName = u.name.split(' ')[0] || u.name;
+    if (topbarLabel) {
+      topbarLabel.innerHTML = `👤 <strong>${escapeHTML(firstName)}</strong> &bull; <span class="loyalty-points-badge">${u.points || 500} Pts</span>`;
+    }
+    if (drawerLabel) {
+      drawerLabel.innerHTML = `👤 <strong>${escapeHTML(firstName)}</strong> (${u.points || 500} Loyalty Pts)`;
+    }
+    // Auto-populate checkout form fields if available
+    const checkoutForm = document.querySelector('#checkoutModal form');
+    if (checkoutForm) {
+      if (checkoutForm.customerName && !checkoutForm.customerName.value) checkoutForm.customerName.value = u.name || '';
+      if (checkoutForm.customerPhone && !checkoutForm.customerPhone.value) checkoutForm.customerPhone.value = u.phone || '';
+      if (checkoutForm.customerAddress && !checkoutForm.customerAddress.value) checkoutForm.customerAddress.value = u.address || '';
+    }
+    // Auto-populate reservation form
+    const resForm = document.getElementById('reservationForm');
+    if (resForm) {
+      if (resForm.resName && !resForm.resName.value) resForm.resName.value = u.name || '';
+      if (resForm.resPhone && !resForm.resPhone.value) resForm.resPhone.value = u.phone || '';
+      if (resForm.resEmail && !resForm.resEmail.value) resForm.resEmail.value = u.email || '';
+    }
+  } else {
+    if (topbarLabel) topbarLabel.textContent = 'Sign In / Sign Up';
+    if (drawerLabel) drawerLabel.textContent = 'Sign In / Sign Up';
+  }
+}
+
+function openAuthModal(tab = 'signin') {
+  const modal = document.getElementById('authModal');
+  if (!modal) return;
+  if (PraiseState.currentUser) {
+    showProfileView();
+  } else {
+    switchAuthTab(tab);
+  }
+  openModal('authModal');
+}
+
+function switchAuthTab(tab) {
+  const tabSignIn = document.getElementById('tabContentSignIn');
+  const tabSignUp = document.getElementById('tabContentSignUp');
+  const tabProfile = document.getElementById('tabContentProfile');
+  const btnSignIn = document.getElementById('tabBtnSignIn');
+  const btnSignUp = document.getElementById('tabBtnSignUp');
+  const tabsHeader = document.getElementById('authTabsHeader');
+
+  if (tabsHeader) tabsHeader.style.display = 'flex';
+  if (tabProfile) tabProfile.style.display = 'none';
+
+  if (tab === 'signin') {
+    if (tabSignIn) tabSignIn.classList.add('active');
+    if (tabSignUp) tabSignUp.classList.remove('active');
+    if (btnSignIn) btnSignIn.classList.add('active');
+    if (btnSignUp) btnSignUp.classList.remove('active');
+  } else {
+    if (tabSignIn) tabSignIn.classList.remove('active');
+    if (tabSignUp) tabSignUp.classList.add('active');
+    if (btnSignIn) btnSignIn.classList.remove('active');
+    if (btnSignUp) btnSignUp.classList.add('active');
+  }
+}
+
+function showProfileView() {
+  const tabSignIn = document.getElementById('tabContentSignIn');
+  const tabSignUp = document.getElementById('tabContentSignUp');
+  const tabProfile = document.getElementById('tabContentProfile');
+  const tabsHeader = document.getElementById('authTabsHeader');
+
+  if (tabsHeader) tabsHeader.style.display = 'none';
+  if (tabSignIn) tabSignIn.classList.remove('active');
+  if (tabSignUp) tabSignUp.classList.remove('active');
+  if (tabProfile) tabProfile.style.display = 'block';
+
+  const u = PraiseState.currentUser;
+  if (!u) return;
+
+  const avatarLetter = document.getElementById('profileAvatarLetter');
+  const nameDisplay = document.getElementById('profileNameDisplay');
+  const emailDisplay = document.getElementById('profileEmailDisplay');
+  const pointsDisplay = document.getElementById('profilePointsDisplay');
+  const phoneDisplay = document.getElementById('profilePhoneDisplay');
+  const addressDisplay = document.getElementById('profileAddressDisplay');
+
+  if (avatarLetter) avatarLetter.textContent = (u.name || 'P').charAt(0).toUpperCase();
+  if (nameDisplay) nameDisplay.textContent = u.name;
+  if (emailDisplay) emailDisplay.textContent = u.email;
+  if (pointsDisplay) pointsDisplay.textContent = `${u.points || 500} Loyalty Pts (₦${((u.points || 500) * 5).toLocaleString()})`;
+  if (phoneDisplay) phoneDisplay.textContent = u.phone || 'N/A';
+  if (addressDisplay) addressDisplay.textContent = u.address || 'Lekki Phase 1, Lagos';
+}
+
+function handleSignInSubmit(e) {
+  e.preventDefault();
+  const email = document.getElementById('signInEmail').value.trim();
+  const password = document.getElementById('signInPassword').value.trim();
+
+  if (!email || password.length < 6) {
+    showToast('Please enter valid email and password.', 'error');
+    return;
+  }
+
+  const user = {
+    name: email.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+    email: email,
+    phone: '0812 345 6789',
+    address: '14 Admiralty Way, Lekki Phase 1, Lagos',
+    points: 500,
+    memberSince: new Date().getFullYear()
+  };
+
+  PraiseState.currentUser = user;
+  try {
+    localStorage.setItem(PraiseState.authStorageKey, JSON.stringify(user));
+  } catch (err) {}
+
+  updateAuthUI();
+  closeModal('authModal');
+  showToast(`Welcome back, ${user.name}! 500 VIP points available.`, 'success');
+}
+
+function handleSignUpSubmit(e) {
+  e.preventDefault();
+  const name = document.getElementById('signUpName').value.trim();
+  const phone = document.getElementById('signUpPhone').value.trim();
+  const email = document.getElementById('signUpEmail').value.trim();
+  const address = document.getElementById('signUpAddress').value.trim();
+  const password = document.getElementById('signUpPassword').value.trim();
+
+  if (name.length < 3 || phone.length < 7 || !email || password.length < 6) {
+    showToast('Please complete all registration fields correctly.', 'error');
+    return;
+  }
+
+  const user = {
+    name: name,
+    phone: phone,
+    email: email,
+    address: address,
+    points: 500, // 500 welcome points
+    memberSince: new Date().getFullYear()
+  };
+
+  PraiseState.currentUser = user;
+  try {
+    localStorage.setItem(PraiseState.authStorageKey, JSON.stringify(user));
+  } catch (err) {}
+
+  updateAuthUI();
+  closeModal('authModal');
+  showToast(`🎉 Account created! Welcome ${name}! You earned 500 VIP points (₦2,500 value)!`, 'success');
+}
+
+function loginDemoVIP() {
+  const demoUser = {
+    name: 'Adebayo Ogunlesi',
+    phone: '0812 345 6789',
+    email: 'adebayo.ogunlesi@example.com',
+    address: 'Flat 4B, Ocean Crest Estate, Lekki Phase 1, Lagos',
+    points: 750,
+    memberSince: 2026
+  };
+  PraiseState.currentUser = demoUser;
+  try {
+    localStorage.setItem(PraiseState.authStorageKey, JSON.stringify(demoUser));
+  } catch (err) {}
+  updateAuthUI();
+  closeModal('authModal');
+  showToast(`Logged in as VIP Diner Adebayo Ogunlesi (750 Pts)!`, 'success');
+}
+
+function handleSignOut() {
+  PraiseState.currentUser = null;
+  try {
+    localStorage.removeItem(PraiseState.authStorageKey);
+  } catch (err) {}
+  updateAuthUI();
+  closeModal('authModal');
+  showToast('You have been signed out of your account.', 'info');
+}
+
+// ==========================================================================
+// 16. MOBILE APP DOWNLOAD & INSTALLATION SYSTEM
+// ==========================================================================
+function initDownloadAppSystem() {
+  document.querySelectorAll('.pwa-direct-install-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            showToast('Praise Restaurant Web App installed successfully!', 'success');
+          }
+          deferredPrompt = null;
+          closeModal('downloadAppModal');
+        });
+      } else {
+        showToast('To install: Tap browser menu (⋮) and select "Install app" or "Add to Home screen".', 'info');
+      }
+    });
+  });
+}
+
+function openDownloadAppModal(tab = 'android') {
+  switchDownloadTab(tab);
+  openModal('downloadAppModal');
+}
+
+function switchDownloadTab(tab) {
+  const tabAndroid = document.getElementById('downloadTabAndroid');
+  const tabIOS = document.getElementById('downloadTabIOS');
+  const tabQR = document.getElementById('downloadTabQR');
+  const btnAndroid = document.getElementById('tabBtnAndroid');
+  const btnIOS = document.getElementById('tabBtnIOS');
+  const btnQR = document.getElementById('tabBtnQR');
+
+  if (tabAndroid) {
+    tabAndroid.classList.remove('active');
+    tabAndroid.style.display = 'none';
+  }
+  if (tabIOS) tabIOS.style.display = 'none';
+  if (tabQR) tabQR.style.display = 'none';
+  if (btnAndroid) btnAndroid.classList.remove('active');
+  if (btnIOS) btnIOS.classList.remove('active');
+  if (btnQR) btnQR.classList.remove('active');
+
+  if (tab === 'android') {
+    if (tabAndroid) {
+      tabAndroid.classList.add('active');
+      tabAndroid.style.display = 'block';
+    }
+    if (btnAndroid) btnAndroid.classList.add('active');
+  } else if (tab === 'ios') {
+    if (tabIOS) tabIOS.style.display = 'block';
+    if (btnIOS) btnIOS.classList.add('active');
+  } else if (tab === 'qr') {
+    if (tabQR) tabQR.style.display = 'block';
+    if (btnQR) btnQR.classList.add('active');
+  }
+}
+
