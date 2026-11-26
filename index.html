@@ -45,6 +45,12 @@
           <i class="fa-solid fa-heart" style="color: #ff6b6b;"></i>
           <span>Favorites (<span class="fav-badge-count">0</span>)</span>
         </button>
+        <button class="download-app-btn" id="topbarDownloadBtn" onclick="openDownloadAppModal('android')" title="Download Mobile App on Phone">
+          <i class="fa-solid fa-mobile-screen"></i> <span>Get App</span>
+        </button>
+        <button class="auth-nav-btn" id="topbarAuthBtn" onclick="openAuthModal()" title="Customer Account / Loyalty">
+          <i class="fa-solid fa-user"></i> <span id="topbarAuthLabel">Sign In / Sign Up</span>
+        </button>
         <button class="pwa-install-btn" style="display: none;" title="Install Praise App">
           <i class="fa-solid fa-download"></i> Install App
         </button>
@@ -132,11 +138,17 @@
       </a>
     </nav>
 
-    <div style="margin-top: auto; display: flex; flex-direction: column; gap: 0.85rem;">
-      <a href="#reserve" class="btn btn-primary-orange" data-view-target="reserve" style="width: 100%;">
+    <div style="margin-top: auto; display: flex; flex-direction: column; gap: 0.85rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.12);">
+      <button class="btn btn-outline-white" id="mobileDrawerAuthBtn" onclick="openAuthModal()" style="width: 100%;">
+        <i class="fa-solid fa-user-circle"></i> <span id="mobileAuthLabel">Sign In / Sign Up</span>
+      </button>
+      <button class="btn btn-primary-orange" onclick="openDownloadAppModal('android')" style="width: 100%;">
+        <i class="fa-solid fa-mobile-screen-button"></i> Download App on Phone
+      </button>
+      <a href="#reserve" class="btn btn-primary-green" data-view-target="reserve" style="width: 100%;">
         <i class="fa-regular fa-calendar-days"></i> Book Table
       </a>
-      <button class="btn btn-outline-white" onclick="openPosterModal();" style="width: 100%;">
+      <button class="btn btn-outline-white btn-sm" onclick="openPosterModal();" style="width: 100%; opacity: 0.85;">
         <i class="fa-solid fa-image"></i> View Menu Poster
       </button>
     </div>
@@ -392,6 +404,73 @@
               <div class="testimonial-author">
                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Chukwuma" class="author-avatar">
                 <div><div class="author-name">Chukwuma Nwosu</div><div class="author-role">Managing Director &bull; Lekki</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- App Download Banner & Smartphone Showcase -->
+      <section class="section-py" style="padding-top: 1rem;">
+        <div class="container">
+          <div class="app-download-banner">
+            <div class="download-grid">
+              <div>
+                <span class="section-tag tag-orange" style="margin-bottom: 1rem; display: inline-flex;"><i class="fa-solid fa-mobile-screen"></i> Instant Native Web App</span>
+                <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 800; line-height: 1.2; margin-bottom: 1rem;">
+                  Take Praise Restaurant <br><span style="color: var(--food-orange-light);">Everywhere on Your Phone</span>
+                </h2>
+                <p style="font-size: 1.05rem; color: rgba(255, 255, 255, 0.85); line-height: 1.6; margin-bottom: 2rem; max-width: 520px;">
+                  Install our lightweight Web App directly to your Android or iPhone home screen with zero storage overhead. Enjoy fast 1-tap ordering, real-time live order dispatch tracking, table booking, and 500 bonus loyalty points!
+                </p>
+
+                <!-- Platform Install Actions -->
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-bottom: 2rem;">
+                  <button type="button" class="btn btn-primary-orange btn-lg" onclick="openDownloadAppModal('android');" style="box-shadow: 0 10px 25px rgba(244, 119, 39, 0.4);">
+                    <i class="fa-brands fa-android" style="font-size: 1.3rem;"></i>
+                    <div style="text-align: left; line-height: 1.1;">
+                      <span style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; display: block; opacity: 0.85;">Install on Phone</span>
+                      <strong style="font-size: 0.95rem;">Android App (PWA)</strong>
+                    </div>
+                  </button>
+
+                  <button type="button" class="btn btn-outline-white btn-lg" onclick="openDownloadAppModal('ios');" style="border-width: 2px;">
+                    <i class="fa-brands fa-apple" style="font-size: 1.4rem;"></i>
+                    <div style="text-align: left; line-height: 1.1;">
+                      <span style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.5px; display: block; opacity: 0.85;">Add to Home Screen</span>
+                      <strong style="font-size: 0.95rem;">iPhone & iPad (iOS)</strong>
+                    </div>
+                  </button>
+
+                  <button type="button" class="btn btn-pill" onclick="openDownloadAppModal('qr');" style="background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.25); padding: 0.75rem 1.25rem;">
+                    <i class="fa-solid fa-qrcode"></i> Scan QR Code
+                  </button>
+                </div>
+
+                <!-- Feature bullet badges -->
+                <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.75);">
+                  <div><i class="fa-solid fa-bolt" style="color: var(--food-orange-light); margin-right: 0.4rem;"></i> Works Offline & Fast</div>
+                  <div><i class="fa-solid fa-hard-drive" style="color: var(--primary-green-light); margin-right: 0.4rem;"></i> Less than 1MB Storage</div>
+                  <div><i class="fa-solid fa-bell" style="color: #ffb703; margin-right: 0.4rem;"></i> Real-Time Food Tracking</div>
+                </div>
+              </div>
+
+              <!-- Smartphone Mockup & QR Scan -->
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
+                <div class="phone-mockup-frame">
+                  <div class="phone-notch"></div>
+                  <img src="images/hero-bg-2.jpg" alt="Praise Mobile App Interface" class="phone-screen-img">
+                  <div style="position: absolute; bottom: 20px; left: 16px; right: 16px; background: rgba(23,21,22,0.92); backdrop-filter: blur(8px); padding: 12px; border-radius: 16px; border: 1px solid rgba(244,119,39,0.4); text-align: center;">
+                    <span style="font-size: 0.75rem; color: var(--food-orange); font-weight: 800; display: block; text-transform: uppercase;">Praise Web App Active</span>
+                    <strong style="font-size: 0.88rem; color: #fff;">14 Admiralty Way &bull; Open Now</strong>
+                  </div>
+                </div>
+
+                <div class="app-qr-box" style="width: 100%; max-width: 280px; text-align: center;">
+                  <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fpraizstudio74-coder.github.io%2Fpraise-project%2F" alt="Scan to install on phone" style="width: 120px; height: 120px; border-radius: 8px; margin-bottom: 0.5rem;" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https%3A%2F%2Fpraise-project.vercel.app%2F'">
+                  <span style="font-size: 0.8rem; font-weight: 700; color: var(--dark-charcoal);">Scan with Phone Camera</span>
+                  <span style="font-size: 0.72rem; color: var(--text-muted);">Opens instant Mobile Web App</span>
+                </div>
               </div>
             </div>
           </div>
@@ -1007,6 +1086,238 @@
         <img src="images/menu-poster.jpg" alt="Praise Menu" style="max-height: 68vh; margin: 0 auto; border-radius: var(--border-radius-md);">
         <div style="margin-top: 1rem;">
           <a href="images/menu-poster.jpg" target="_blank" class="btn btn-primary-orange btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open Full Image</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       CUSTOMER AUTHENTICATION MODAL (SIGN IN / SIGN UP / VIP PROFILE)
+       ========================================================================== -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal-dialog" style="max-width: 500px;">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <div class="brand-crest" style="width: 38px; height: 38px; font-size: 1rem;"><i class="fa-solid fa-crown"></i></div>
+          <div>
+            <h3 class="modal-title" id="authModalTitle" style="font-size: 1.25rem;">Customer Portal</h3>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">VIP Diners Club & Quick Reorder</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('authModal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="modal-body" style="padding: 1.5rem 1.75rem 2rem;">
+        <!-- Auth Tabs (Sign In / Sign Up) -->
+        <div class="auth-tabs-header" id="authTabsHeader">
+          <button type="button" class="auth-tab-btn active" id="tabBtnSignIn" onclick="switchAuthTab('signin')">
+            <i class="fa-solid fa-right-to-bracket" style="margin-right: 0.4rem;"></i> Sign In
+          </button>
+          <button type="button" class="auth-tab-btn" id="tabBtnSignUp" onclick="switchAuthTab('signup')">
+            <i class="fa-solid fa-user-plus" style="margin-right: 0.4rem;"></i> Create Account
+          </button>
+        </div>
+
+        <!-- SIGN IN TAB CONTENT -->
+        <div class="auth-tab-content active" id="tabContentSignIn">
+          <form id="signInForm" onsubmit="handleSignInSubmit(event)">
+            <div class="auth-input-group">
+              <i class="fa-solid fa-envelope auth-input-icon"></i>
+              <input type="email" id="signInEmail" class="auth-input" placeholder="Email Address (e.g. adebayo@example.com)" required>
+            </div>
+            <div class="auth-input-group">
+              <i class="fa-solid fa-lock auth-input-icon"></i>
+              <input type="password" id="signInPassword" class="auth-input" placeholder="Password (minimum 6 characters)" required minlength="6">
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; font-size: 0.82rem;">
+              <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; color: var(--text-muted);">
+                <input type="checkbox" checked style="accent-color: var(--primary-green);"> Remember my session
+              </label>
+              <a href="#" onclick="showToast('Password reset link sent to registered email.', 'info'); return false;" style="color: var(--food-orange); font-weight: 600;">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="btn btn-primary-orange btn-lg" style="width: 100%; margin-bottom: 1rem;">
+              <i class="fa-solid fa-arrow-right-to-bracket"></i> Sign In to Account
+            </button>
+
+            <!-- Quick Demo Login Button for convenience -->
+            <button type="button" class="btn btn-outline-dark btn-sm" onclick="loginDemoVIP()" style="width: 100%; font-size: 0.8rem; border-style: dashed;">
+              <i class="fa-solid fa-bolt" style="color: var(--food-orange);"></i> Instant Demo VIP Login (1-Click Test)
+            </button>
+          </form>
+        </div>
+
+        <!-- SIGN UP TAB CONTENT -->
+        <div class="auth-tab-content" id="tabContentSignUp">
+          <!-- Loyalty bonus badge -->
+          <div style="background: rgba(77, 151, 12, 0.12); border: 1px dashed var(--primary-green); border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.75rem;">
+            <i class="fa-solid fa-gift" style="font-size: 1.5rem; color: var(--primary-green);"></i>
+            <div style="font-size: 0.82rem; color: var(--dark-charcoal); line-height: 1.4;">
+              <strong>Join Praise VIP Diners Club!</strong><br>
+              Receive <span style="color: var(--food-orange); font-weight: 800;">500 Free Loyalty Points (₦2,500 value)</span> instantly upon registration.
+            </div>
+          </div>
+
+          <form id="signUpForm" onsubmit="handleSignUpSubmit(event)">
+            <div class="auth-input-group">
+              <i class="fa-solid fa-user auth-input-icon"></i>
+              <input type="text" id="signUpName" class="auth-input" placeholder="Full Name (e.g. Adebayo Ogunlesi)" required minlength="3">
+            </div>
+
+            <div class="auth-input-group">
+              <i class="fa-solid fa-phone auth-input-icon"></i>
+              <input type="tel" id="signUpPhone" class="auth-input" placeholder="Phone Number (e.g. 0812 345 6789)" required minlength="8">
+            </div>
+
+            <div class="auth-input-group">
+              <i class="fa-solid fa-envelope auth-input-icon"></i>
+              <input type="email" id="signUpEmail" class="auth-input" placeholder="Email Address" required>
+            </div>
+
+            <div class="auth-input-group">
+              <i class="fa-solid fa-location-dot auth-input-icon"></i>
+              <input type="text" id="signUpAddress" class="auth-input" placeholder="Delivery Address & Estate (e.g. Lekki Phase 1, Lagos)" required>
+            </div>
+
+            <div class="auth-input-group">
+              <i class="fa-solid fa-lock auth-input-icon"></i>
+              <input type="password" id="signUpPassword" class="auth-input" placeholder="Create Password (min. 6 characters)" required minlength="6">
+            </div>
+
+            <button type="submit" class="btn btn-primary-green btn-lg" style="width: 100%;">
+              <i class="fa-solid fa-crown"></i> Complete Sign Up & Earn 500 Pts
+            </button>
+          </form>
+        </div>
+
+        <!-- SIGNED IN PROFILE VIEW -->
+        <div class="auth-tab-content" id="tabContentProfile" style="display: none; text-align: center;">
+          <div style="width: 76px; height: 76px; border-radius: 50%; background: linear-gradient(135deg, var(--food-orange), #d96213); color: #fff; font-size: 2rem; font-weight: 900; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto; box-shadow: var(--shadow-orange);">
+            <span id="profileAvatarLetter">A</span>
+          </div>
+          <h3 id="profileNameDisplay" style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 800; margin-bottom: 0.2rem;">Adebayo Ogunlesi</h3>
+          <p id="profileEmailDisplay" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.25rem;">adebayo@example.com</p>
+
+          <div style="background: var(--warm-cream-light); border: 1.5px solid var(--warm-cream-border); border-radius: 12px; padding: 1.25rem; margin-bottom: 1.5rem; text-align: left;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; border-bottom: 1px solid var(--warm-cream-border); padding-bottom: 0.5rem;">
+              <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fa-solid fa-coins" style="color: #ffb703; margin-right: 0.4rem;"></i> VIP Loyalty Balance</span>
+              <span id="profilePointsDisplay" style="font-weight: 900; color: var(--primary-green); font-size: 1.05rem;">500 Points</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; border-bottom: 1px solid var(--warm-cream-border); padding-bottom: 0.5rem;">
+              <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fa-solid fa-phone" style="color: var(--primary-green); margin-right: 0.4rem;"></i> Phone</span>
+              <span id="profilePhoneDisplay" style="font-weight: 700; color: var(--dark-charcoal); font-size: 0.85rem;">0812 345 6789</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.85rem; color: var(--text-muted);"><i class="fa-solid fa-location-dot" style="color: var(--food-orange); margin-right: 0.4rem;"></i> Default Address</span>
+              <span id="profileAddressDisplay" style="font-weight: 700; color: var(--dark-charcoal); font-size: 0.85rem; max-width: 200px; text-align: right; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;">Lekki Phase 1, Lagos</span>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem;">
+            <button type="button" class="btn btn-outline-dark" onclick="closeModal('authModal')" style="flex: 1;">
+              <i class="fa-solid fa-check"></i> Continue Shopping
+            </button>
+            <button type="button" class="btn btn-primary-orange" onclick="handleSignOut()" style="flex: 1;">
+              <i class="fa-solid fa-arrow-right-from-bracket"></i> Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MOBILE APP DOWNLOAD MODAL (ANDROID PWA / IOS SAFARI / QR CODE)
+       ========================================================================== -->
+  <div class="modal-overlay" id="downloadAppModal">
+    <div class="modal-dialog" style="max-width: 540px;">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <div class="brand-crest" style="width: 38px; height: 38px; font-size: 1rem; background: var(--food-orange);"><i class="fa-solid fa-mobile-screen"></i></div>
+          <div>
+            <h3 class="modal-title" style="font-size: 1.25rem;">Download Praise App</h3>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">Install directly on Android or iPhone &bull; No App Store required!</span>
+          </div>
+        </div>
+        <button class="modal-close-btn" onclick="closeModal('downloadAppModal')"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="modal-body" style="padding: 1.5rem 1.75rem 2rem;">
+        <!-- Platform Selection Tabs -->
+        <div class="auth-tabs-header" id="downloadTabsHeader" style="margin-bottom: 1.25rem;">
+          <button type="button" class="auth-tab-btn active" id="tabBtnAndroid" onclick="switchDownloadTab('android')">
+            <i class="fa-brands fa-android" style="margin-right: 0.4rem; color: #3ddc84;"></i> Android
+          </button>
+          <button type="button" class="auth-tab-btn" id="tabBtnIOS" onclick="switchDownloadTab('ios')">
+            <i class="fa-brands fa-apple" style="margin-right: 0.4rem; color: var(--dark-charcoal);"></i> iPhone (iOS)
+          </button>
+          <button type="button" class="auth-tab-btn" id="tabBtnQR" onclick="switchDownloadTab('qr')">
+            <i class="fa-solid fa-qrcode" style="margin-right: 0.4rem; color: var(--food-orange);"></i> Scan QR
+          </button>
+        </div>
+
+        <!-- ANDROID TAB -->
+        <div class="download-tab-content active" id="downloadTabAndroid">
+          <div style="text-align: center; margin-bottom: 1.5rem;">
+            <p style="font-size: 0.92rem; color: var(--text-dark); line-height: 1.5;">
+              Install Praise Restaurant directly as a standalone Progressive Web App (PWA) with push notifications, offline support, and full-screen experience.
+            </p>
+            <button type="button" class="btn btn-primary-orange btn-lg pwa-direct-install-btn" style="margin: 1rem auto; width: 100%;">
+              <i class="fa-solid fa-download"></i> Install Praise Web App on Phone
+            </button>
+          </div>
+
+          <div class="install-guide-steps">
+            <div class="install-step-item">
+              <span class="install-step-number">1</span>
+              <div><strong>Tap the 'Install' button above</strong> or open Google Chrome's three dots menu (⋮).</div>
+            </div>
+            <div class="install-step-item">
+              <span class="install-step-number">2</span>
+              <div>Tap <strong>'Install app'</strong> or <strong>'Add to Home screen'</strong>.</div>
+            </div>
+            <div class="install-step-item">
+              <span class="install-step-number">3</span>
+              <div>Launch Praise Restaurant directly from your phone's app tray!</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- IOS SAFARI TAB -->
+        <div class="download-tab-content" id="downloadTabIOS" style="display: none;">
+          <div style="background: var(--warm-cream-light); border-radius: 12px; padding: 1.25rem; border: 1.5px solid var(--warm-cream-border); margin-bottom: 1.5rem;">
+            <strong style="color: var(--dark-charcoal); display: block; margin-bottom: 0.3rem;"><i class="fa-brands fa-apple"></i> Apple Safari Installation (3 Easy Steps)</strong>
+            <p style="font-size: 0.85rem; color: var(--text-muted); margin: 0;">Apple requires installation through the native Safari Share sheet:</p>
+          </div>
+
+          <div class="install-guide-steps">
+            <div class="install-step-item">
+              <span class="install-step-number">1</span>
+              <div>In Safari, tap the <strong>Share button</strong> <i class="fa-solid fa-arrow-up-from-bracket" style="color: #007aff; margin: 0 4px;"></i> at the bottom navigation bar.</div>
+            </div>
+            <div class="install-step-item">
+              <span class="install-step-number">2</span>
+              <div>Scroll down and select <strong>'Add to Home Screen'</strong> <i class="fa-regular fa-square-plus" style="margin: 0 4px;"></i>.</div>
+            </div>
+            <div class="install-step-item">
+              <span class="install-step-number">3</span>
+              <div>Tap <strong>'Add'</strong> at the top right corner. The Praise App icon will appear on your iPhone screen!</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- QR CODE TAB -->
+        <div class="download-tab-content" id="downloadTabQR" style="display: none; text-align: center;">
+          <p style="font-size: 0.92rem; color: var(--text-dark); margin-bottom: 1.25rem;">
+            Open your smartphone camera or QR scanner and point it at this QR code to launch the Web App on your mobile device instantly:
+          </p>
+          <div style="background: #fff; padding: 1.5rem; display: inline-block; border-radius: 16px; box-shadow: var(--shadow-md); border: 2px solid var(--food-orange); margin-bottom: 1rem;">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fpraizstudio74-coder.github.io%2Fpraise-project%2F" alt="Scan to open Praise Restaurant on Phone" style="width: 180px; height: 180px; display: block; margin: 0 auto;" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fpraise-project.vercel.app%2F'">
+          </div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">
+            Point your phone's camera &bull; Tap the yellow link banner to open
+          </div>
         </div>
       </div>
     </div>
