@@ -1,21 +1,48 @@
-# 🍲 Praise Restaurant – Official Website
+# 🍲 Praise Restaurant – High-Performance Web App (SPA & PWA)
 
-[![GitHub Pages Deployment](https://img.shields.io/badge/Deployment-GitHub%20Pages%20Ready-success?style=for-the-badge&logo=github)](https://pages.github.com/)
+[![Vercel Deployment](https://img.shields.io/badge/Deployment-Vercel%20Live-black?style=for-the-badge&logo=vercel)](https://vercel.com/)
+[![PWA Ready](https://img.shields.io/badge/PWA-Installable%20App-4D970C?style=for-the-badge&logo=pwa)](manifest.json)
+[![SPA Architecture](https://img.shields.io/badge/Architecture-Single%20Page%20App-F47727?style=for-the-badge)](index.html)
 [![License: MIT](https://img.shields.io/badge/License-MIT-orange?style=for-the-badge)](LICENSE)
-[![Design Style: African Heritage](https://img.shields.io/badge/Design-African%20Heritage-4D970C?style=for-the-badge)](index.html)
 
-A stunning, premium, modern, fully responsive four-page website for **Praise Restaurant**, specializing in authentic African cuisine, refreshing beverages, and professional event catering.
+A world-class, responsive, and professional Progressive Web App (PWA) & Single Page App (SPA) for **Praise Restaurant**, serving authentic West African cuisine in Lekki Phase 1, Lagos, Nigeria.
+
+---
+
+## 📱 Key Web App Features
+
+### 1. 📲 Mobile App Download & Installation System
+- **Android & Desktop PWA:** Native 1-click install banner and modal utilizing the browser's `beforeinstallprompt` event.
+- **iPhone & iPad (iOS Safari):** Built-in interactive 3-step walkthrough guiding customers to tap "Share" and "Add to Home Screen".
+- **Real-Time QR Code Scanner:** Diners can scan the QR code with their mobile cameras to launch the Web App instantly on any smartphone.
+- **Offline Shell & Service Worker (`sw.js`):** Fully caches essential assets for lightning-fast offline startup.
+
+### 2. 👤 Customer Authentication & VIP Diners Loyalty Suite
+- **Sign In & Sign Up Modals:** Fast modal overlay allowing customers to create an account with their Full Name, Phone, Email, Delivery Address, and Password.
+- **500 Welcome Loyalty Points:** New customers receive 500 VIP points (₦2,500 food value) credited instantly upon registration.
+- **Automated Profile Pre-fill:** Automatically populates the customer's name, phone, and delivery address into the Food Checkout, Table Reservation, and Catering forms.
+- **VIP Customer Header Pill:** Dynamic header display showing `👤 [Name] • 500 Pts` with interactive account details and sign out.
+- **Instant Demo VIP Account:** 1-click test button for instant evaluation without typing.
+
+### 3. 🍲 Interactive Food Customizer & Ordering Engine
+- **Dish Customizer Modal:** Select traditional swallows (Pounded Yam, Semovita, Eba, Fufu, Wheat), choose spice levels (Mild, Medium, Hot, Extra Fiery Asun), and add extra portions (Fried Dodo, Peppered Chicken, Zobo Drink).
+- **Persistent Cart & Promo Codes:** Saves cart items to `localStorage`, calculates 7.5% Nigerian VAT, and applies promotional codes like `PRAISE10`.
+- **Live Order Tracker:** Visual 4-step kitchen progress stepper (Order Placed, Simmering in Kitchen, Out for Hot Delivery, Delivered).
+
+### 4. 🪑 Interactive Seating Studio & Table Booking
+- Visual floor plan selector: Main Heritage Dining Hall, Romantic VIP Terrace, or Chef's Private Table.
+- Instant booking reference code generation and SMS/WhatsApp confirmation simulation.
 
 ---
 
 ## 🎨 Brand Identity & Palette
 
-Designed with an appetizing, elegant African color scheme:
 - **Primary Green:** `#4D970C` (Fresh herbs, sustainability, health)
 - **Dark Charcoal:** `#171516` (Luxury dining ambiance, contrast, sophistication)
 - **Food Orange:** `#F47727` (Spice, flame, high-conversion action buttons)
 - **Warm Cream:** `#F5F0E8` (Welcoming hospitality, comfortable canvas)
 - **Pure White:** `#FFFFFF` (Crisp readability, clean card surfaces)
+
 
 **Typography:**
 - **Headings & Accents:** `Playfair Display` (Luxury serif display)
