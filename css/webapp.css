@@ -708,3 +708,286 @@
     padding-bottom: 84px;
   }
 }
+
+/* --- CUSTOMER AUTHENTICATION & PROFILE SYSTEM --- */
+.auth-nav-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--pure-white);
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.auth-nav-btn:hover {
+  background: var(--primary-green);
+  border-color: var(--primary-green);
+  color: var(--pure-white);
+}
+
+.user-profile-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(77, 151, 12, 0.2);
+  border: 1px solid var(--primary-green);
+  color: var(--pure-white);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  position: relative;
+}
+
+.loyalty-points-badge {
+  background: var(--food-orange);
+  color: var(--pure-white);
+  font-size: 0.7rem;
+  font-weight: 900;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+}
+
+.auth-tabs-header {
+  display: flex;
+  border-bottom: 2px solid var(--warm-cream-border);
+  margin-bottom: 1.75rem;
+}
+
+.auth-tab-btn {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--text-muted);
+  text-align: center;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  transition: all var(--transition-fast);
+}
+
+.auth-tab-btn.active {
+  color: var(--food-orange);
+  border-bottom-color: var(--food-orange);
+}
+
+.auth-tab-content {
+  display: none;
+}
+
+.auth-tab-content.active {
+  display: block;
+}
+
+.auth-input-group {
+  position: relative;
+  margin-bottom: 1.25rem;
+}
+
+.auth-input-icon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.auth-input {
+  width: 100%;
+  padding: 0.85rem 1rem 0.85rem 2.6rem;
+  border-radius: var(--border-radius-sm);
+  border: 1.5px solid var(--warm-cream-border);
+  background-color: var(--warm-cream-light);
+  font-size: 0.92rem;
+  color: var(--text-dark);
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  background-color: var(--pure-white);
+  box-shadow: 0 0 0 3px var(--primary-green-soft);
+}
+
+/* --- MOBILE APP DOWNLOAD MODAL & BANNER --- */
+.app-download-banner {
+  background: linear-gradient(135deg, var(--dark-charcoal) 0%, #252022 100%);
+  border: 2px solid var(--food-orange);
+  border-radius: var(--border-radius-xl);
+  padding: 3.5rem 3rem;
+  color: var(--pure-white);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  margin: 4rem 0;
+}
+
+.download-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  align-items: center;
+  gap: 3.5rem;
+}
+
+.app-badge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: var(--dark-charcoal);
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  color: var(--pure-white);
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--border-radius-md);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.app-badge-btn:hover {
+  background: var(--food-orange);
+  border-color: var(--food-orange);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-orange);
+}
+
+.app-qr-box {
+  background: var(--pure-white);
+  padding: 1.25rem;
+  border-radius: var(--border-radius-lg);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: var(--shadow-lg);
+  color: var(--text-dark);
+}
+
+.phone-mockup-frame {
+  position: relative;
+  max-width: 280px;
+  margin: 0 auto;
+  border: 8px solid #332d30;
+  border-radius: 36px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  background: var(--dark-charcoal);
+}
+
+.phone-notch {
+  width: 120px;
+  height: 18px;
+  background: #332d30;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  z-index: 10;
+}
+
+.phone-screen-img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+}
+
+/* Enhanced CTA Active & Micro-Interactions */
+.btn:active,
+.btn-primary-orange:active,
+.btn-primary-green:active {
+  transform: scale(0.97);
+}
+
+.btn-pill {
+  border-radius: 999px;
+}
+
+.install-guide-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin: 1.5rem 0;
+  text-align: left;
+}
+
+.install-step-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--warm-cream-light);
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--warm-cream-border);
+  font-size: 0.92rem;
+  color: var(--text-dark);
+}
+
+.install-step-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--food-orange);
+  color: var(--pure-white);
+  font-weight: 800;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.download-app-btn {
+  background: linear-gradient(135deg, var(--food-orange), #d96213);
+  color: var(--pure-white);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.4rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(244, 119, 39, 0.35);
+}
+
+.download-app-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(244, 119, 39, 0.5);
+  background: linear-gradient(135deg, #f78c46, var(--food-orange));
+}
+
+.download-tab-content {
+  display: none;
+}
+
+.download-tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@media (max-width: 900px) {
+  .download-grid {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2.5rem;
+  }
+
+  .app-download-banner {
+    padding: 2.25rem 1.5rem;
+  }
+}
+
